@@ -72,10 +72,10 @@ describe('application tests', () => {
     expect(parent).toHaveAttribute('href', link);
   };
 
-  it('should render name: Adam Alston', () => {
+  it('should render name: Abdoslam Baabbad', () => {
     const element = screen.getByTestId('name');
 
-    checkContent(element, /^Adam Alston$/, undefined, true);
+    checkContent(element, /^Abdoslam Baabbad$/, undefined, true);
   });
 
   it('should render title: Data Analyst', () => {
@@ -87,7 +87,7 @@ describe('application tests', () => {
   it('should render creator', () => {
     const element = screen.getByTestId('creator');
 
-    checkContent(element, /^Adam Alston$/, 'http://abdoslamB.github.io/');
+    checkContent(element, /^Abdoslam Baabbad$/, 'http://abdoslamB.github.io/');
   });
 
   it('should render link to source code', () => {
@@ -149,7 +149,7 @@ describe('application tests', () => {
     const footer = screen.getByTestId('footer');
 
     expect(footer).toHaveTextContent(
-      /^Designed and built by Adam Alston \| Source$/,
+      /^Designed and built by Abdoslam Baabbad \| Source$/,
     );
   });
 });
@@ -169,7 +169,7 @@ describe('app context tests', () => {
     // partial footer should now be visible
     const footer = screen.getByTestId('footer');
 
-    expect(footer).toHaveTextContent(/^Designed and built by Adam Alston$/);
+    expect(footer).toHaveTextContent(/^Designed and built by Abdoslam Baabbad$/);
   });
 
   describe('reducer tests', () => {
