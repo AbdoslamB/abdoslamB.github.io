@@ -1,32 +1,40 @@
-<div align="center">
-  <img alt="Atom icon" src="public/icons/favicon.svg" height="64" />
-  <h1>adamalston.com - v2</h1>
-</div>
+## Open source
 
-Version 2 of [adamalston.com](https://www.adamalston.com) built with [React](https://react.dev).
+<div align="center">
+  <img alt="Atom icon" src="public/icons/header.svg" width="100%" />
+</div>
 
 | Desktop preview                                                     | Mobile preview                                                    |
 | ------------------------------------------------------------------- | ----------------------------------------------------------------- |
 | <img alt="Desktop preview" src="images/desktop.png" height="370" /> | <img alt="Mobile preview" src="images/mobile.png" height="370" /> |
 
-This website is designed to be simple and accessible. Dynamic particles create an interactive experience for visitors. The site offers two themes via a toggle: a dark theme (default) and a light theme. The selected theme persists across tabs, windows, and page reloads.
+The abdoslam personal website is built with [React](https://react.dev) and was forked from Adam Alston’s open-source project. It keeps the original focus on simplicity and accessibility while adding my own content.
 
-## Open source
+This website is designed to be simple and accessible. Dynamic particles create an interactive experience for visitors. The site offers two themes via a toggle—dark (default) and light—and the selection persists across tabs, windows, and reloads.
 
-This website is open source with the hope that others will use the code to create their own websites. If you do, please give proper credit by linking back to [adamalston.com](https://www.adamalston.com).
+Optimized for screen sizes from 4″ phones up through 13″ tablets.
 
+## <img alt="Code logo" src="https://git.io/JUnUc" height="18"/> Open source
+
+This website remains open source so others can adapt it for their own use. Please credit both this repo and the original author.
+
+<details>
+  <summary><b>Install and setup</b></summary>
+
+1. Clone this repository.
+2. Install dependencies: `npm install`
+3. Start the dev server: `npm start`
+</details>
 ## Getting started
 
 > [!IMPORTANT]
 > This project requires [Node.js](https://nodejs.org/) to run.
 
 1. Clone this repository:
-   ```sh
-   git clone https://github.com/adamalston/v2.git
-   ```
+
 2. Navigate into the project directory:
    ```sh
-   cd v2
+   cd personal-website
    ```
 3. Install dependencies:
    ```sh
