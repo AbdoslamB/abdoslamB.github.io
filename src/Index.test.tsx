@@ -78,29 +78,29 @@ describe('application tests', () => {
     checkContent(element, /^Adam Alston$/, undefined, true);
   });
 
-  it('should render title: Software Engineer', () => {
+  it('should render title: Data Analyst', () => {
     const element = screen.getByTestId('title');
 
-    checkContent(element, /^Software Engineer$/, undefined, true);
+    checkContent(element, /^Data Analyst$/, undefined, true);
   });
 
   it('should render creator', () => {
     const element = screen.getByTestId('creator');
 
-    checkContent(element, /^Adam Alston$/, 'https://www.adamalston.com/');
+    checkContent(element, /^Adam Alston$/, 'http://abdoslamB.github.io/');
   });
 
   it('should render link to source code', () => {
     const element = screen.getByTestId('source');
 
-    checkContent(element, /^Source$/, 'https://github.com/adamalston/v2/');
+    checkContent(element, /^Source$/, 'https://github.com/AbdoslamB/abdoslamB.github.io');
   });
 
   it('should render GitHub button', () => {
     const parent = screen.getByTestId('button-GitHub');
     const child = screen.getByTestId('GitHub');
 
-    checkButton(parent, child, /^GitHub$/, 'https://github.com/adamalston/');
+    checkButton(parent, child, /^GitHub$/, 'https://github.com/AbdoslamB/');
   });
 
   it('should render LinkedIn button', () => {
@@ -111,27 +111,16 @@ describe('application tests', () => {
       parent,
       child,
       /^LinkedIn$/,
-      'https://www.linkedin.com/in/adam-alston/',
+      'https://www.linkedin.com/in/abdoslambaabbad',
     );
   });
 
-  it('should render Resume button', () => {
-    const parent = screen.getByTestId('button-Resume');
-    const child = screen.getByTestId('Resume');
-
-    checkButton(
-      parent,
-      child,
-      /^Resume$/,
-      'https://drive.google.com/file/d/1VQ_Oeim_e92QEMi64ejGWY5Hf4RRxfeJ/view',
-    );
-  });
 
   it('should render Email button', () => {
     const parent = screen.getByTestId('button-Email');
     const child = screen.getByTestId('Email');
 
-    checkButton(parent, child, /^Email$/, 'mailto:aalston9@gmail.com');
+    checkButton(parent, child, /^Email$/, 'mailto:abdoslam.baabbad+github@gmail.com');
   });
 
   it('should toggle between the dark and light themes', () => {
