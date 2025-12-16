@@ -1,3 +1,13 @@
+::selection {
+  background-color: #52e360;
+  color: #24444E;
+}
+
+::-moz-selection {
+  background-color: #52e360;
+  color: #24444E;
+}
+
 html {
   overflow: hidden;
   font-size: 12px;
