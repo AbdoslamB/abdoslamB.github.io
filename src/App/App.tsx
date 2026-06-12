@@ -27,6 +27,10 @@ export const App = () => {
     };
   }, []);
 
+  useEffect(() => {
+    document.title = config.name.display;
+  }, []);
+
   return (
     <AppProvider config={config} isMobile={isMobile}>
       <main className="app">
