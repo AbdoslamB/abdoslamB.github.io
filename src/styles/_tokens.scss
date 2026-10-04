@@ -1,0 +1,59 @@
+// Colour tokens. Text colours are white/black at reduced opacity over the
+// background, checked for WCAG AAA (7:1) contrast:
+// --text-muted is 8.1:1 on black and 8.6:1 on white.
+
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #000;
+  --text: #fff;
+  --text-soft: #fffd;
+  --text-muted: #ffffffa1;
+  --surface: #ffffff0d;
+  --surface-hover: #ffffff17;
+  --border: #ffffff26;
+  --glass: #000000a6;
+  --glow: rgb(128 128 128 / 25%);
+  --focus: #52e360;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: #fff;
+  --text: #000;
+  --text-soft: #000d;
+  --text-muted: #000000b3;
+  --surface: #0000000a;
+  --surface-hover: #00000012;
+  --border: #00000024;
+  --glass: #ffffffb3;
+  --glow: rgb(128 128 128 / 25%);
+  --focus: #12812a;
+}
+
+:root {
+  // The six dot colours, reused for accents so the page feels like the hero.
+  --rainbow: linear-gradient(
+    90deg,
+    #ff2600,
+    #ff8000,
+    #ffd500,
+    #2d2,
+    #00bfff,
+    #c912ed
+  );
+  --font:
+    -apple-system, blinkmacsystemfont, 'Helvetica Neue', 'Segoe UI', roboto,
+    oxygen, ubuntu, cantarell, 'Open Sans', sans-serif;
+
+  // Headings and the logo. General Sans is loaded from Fontshare (see
+  // Base.astro); its license doesn't allow committing the font files to a
+  // public repository.
+  --font-display: 'General Sans', var(--font);
+  --radius: 1rem;
+  --header-height: 3.75rem;
+  --container: 72rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+}

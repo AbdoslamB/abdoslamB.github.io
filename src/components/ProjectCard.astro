@@ -1,0 +1,27 @@
+---
+import ProjectStats from '@/components/ProjectStats.astro';
+import { type ProjectView, visibleTags } from '@/lib/projects';
+
+interface Props {
+  project: ProjectView;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="card">
+  <h3 class="card__title">
+    <!-- The link covers the whole card (see .card__link::after). -->
+    <a class="card__link" href={project.url} rel="noopener">
+      {project.title}
+    </a>
+  </h3>
+  <p class="card__summary">{project.summary}</p>
+  {project.result && <p class="card__result">{project.result}</p>}
+  <ul class="tags" aria-label="Topics">
+    {visibleTags(project.tags).map((tag) => (
+      <li>{tag}</li>
+    ))}
+  </ul>
+  <ProjectStats project={project} />
+</article>

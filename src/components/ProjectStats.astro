@@ -1,0 +1,32 @@
+---
+import Icon from '@/components/Icon.astro';
+import { formatCount, type ProjectView, showStars } from '@/lib/projects';
+
+interface Props {
+  project: Pick<ProjectView, 'downloads' | 'stats'>;
+}
+
+// Only signals that help a visitor judge a project: stars once there are
+// enough to mean something, and release downloads.
+const { stats, downloads } = Astro.props.project;
+const stars = stats && showStars(stats.stars) ? stats.stars : undefined;
+const hasDownloads = downloads !== undefined && downloads > 0;
+---
+
+{(stars !== undefined || hasDownloads) && (
+  <ul class="stats" aria-label="Repository stats">
+    {stars !== undefined && (
+      <li title="GitHub stars">
+        <Icon name="star" />
+        <span class="visually-hidden">Stars:</span> {formatCount(stars)}
+      </li>
+    )}
+    {hasDownloads && (
+      <li title="Release downloads">
+        <Icon name="download" />
+        {formatCount(downloads)}
+        <span> downloads</span>
+      </li>
+    )}
+  </ul>
+)}

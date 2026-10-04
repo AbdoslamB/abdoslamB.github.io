@@ -1,0 +1,17 @@
+---
+import Icon from '@/components/Icon.astro';
+---
+
+<!-- The pressed state and label are kept in sync by src/scripts/theme.ts; the
+     icon swaps with CSS so it's right before any script runs. -->
+<button
+  class="theme-toggle"
+  type="button"
+  data-theme-toggle
+  aria-pressed="true"
+  title="Toggle dark mode"
+>
+  <span class="visually-hidden">Dark mode</span>
+  <Icon name="moon" class="theme-toggle__moon" />
+  <Icon name="sun" class="theme-toggle__sun" />
+</button>

@@ -1,0 +1,116 @@
+{
+  "fetchedAt": "2026-10-04T02:48:29.902Z",
+  "repos": {
+    "AbdoslamB": {
+      "name": "AbdoslamB",
+      "url": "https://github.com/AbdoslamB/AbdoslamB",
+      "homepage": null,
+      "description": null,
+      "language": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-10-03T08:47:15Z",
+      "fork": false,
+      "archived": false
+    },
+    "abdoslamB.github.io": {
+      "name": "abdoslamB.github.io",
+      "url": "https://github.com/AbdoslamB/abdoslamB.github.io",
+      "homepage": "http://abdoslamB.github.io",
+      "description": ":test_tube: Personal website built using React!",
+      "language": "TypeScript",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-06-12T01:17:57Z",
+      "fork": false,
+      "archived": false
+    },
+    "electron-portal-desktop-template": {
+      "name": "electron-portal-desktop-template",
+      "url": "https://github.com/AbdoslamB/electron-portal-desktop-template",
+      "homepage": null,
+      "description": "An Electron-based desktop application template designed for simplicity, rapid prototyping, and production-ready structure. It embeds remote web experiences inside a frameless window, providing a clean foundation for building custom Electron apps",
+      "language": "JavaScript",
+      "stars": 1,
+      "forks": 0,
+      "pushedAt": "2025-12-06T22:40:54Z",
+      "fork": false,
+      "archived": false
+    },
+    "fizzbuzz": {
+      "name": "fizzbuzz",
+      "url": "https://github.com/AbdoslamB/fizzbuzz",
+      "homepage": null,
+      "description": "Classic FizzBuzz implemented across R, Python, and SQL, with helper functions for divisibility checks and matrix output alignment.",
+      "language": "R",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2024-07-01T16:52:43Z",
+      "fork": false,
+      "archived": false
+    },
+    "Forecasting-with-R-Hyndman": {
+      "name": "Forecasting-with-R-Hyndman",
+      "url": "https://github.com/AbdoslamB/Forecasting-with-R-Hyndman",
+      "homepage": "https://otexts.com/fpp2",
+      "description": "The problems here are from the book 'Forecasting: Principles and Practice(2nd ed.)' by Rob J Hyndman and George Athanasopoulos, Monash University, Australia.",
+      "language": "R",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2022-02-10T06:17:55Z",
+      "fork": false,
+      "archived": false
+    },
+    "IBM_stock_price_forecast": {
+      "name": "IBM_stock_price_forecast",
+      "url": "https://github.com/AbdoslamB/IBM_stock_price_forecast",
+      "homepage": null,
+      "description": "BM stock price forecasting with R — comparing Naïve, ETS, ARIMA, and NNAR models using RMSE & MASE",
+      "language": "R",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2025-12-07T00:49:24Z",
+      "fork": false,
+      "archived": false
+    },
+    "InkDoc": {
+      "name": "InkDoc",
+      "url": "https://github.com/AbdoslamB/InkDoc",
+      "homepage": "https://abdoslamb.github.io/InkDoc",
+      "description": "Turn any document into clean, AI-ready Markdown — locally on your machine. Desktop app for Windows, macOS & Linux powered by MarkItDown, Docling, GLM-OCR and Markit.",
+      "language": "Python",
+      "stars": 45,
+      "forks": 7,
+      "pushedAt": "2026-10-03T18:58:28Z",
+      "fork": false,
+      "archived": false
+    },
+    "kaggle-titanic": {
+      "name": "kaggle-titanic",
+      "url": "https://github.com/AbdoslamB/kaggle-titanic",
+      "homepage": "https://www.kaggle.com/c/titanic",
+      "description": "Building Machine Learning model to predict the Titanic survivors, the competition from Kaggle platform",
+      "language": "R",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2022-06-18T16:29:33Z",
+      "fork": false,
+      "archived": false
+    },
+    "strands-decider": {
+      "name": "strands-decider",
+      "url": "https://github.com/AbdoslamB/strands-decider",
+      "homepage": "https://strandsagents.com/docs/labs/",
+      "description": "A small, fast decision model, or system one model, for agentic workflows. Pick between options or rate on a scale faster than an LLM, with a calibrated confidence on every decision.",
+      "language": null,
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-10-02T21:20:48Z",
+      "fork": true,
+      "archived": false
+    }
+  },
+  "downloads": {
+    "InkDoc": 357
+  }
+}

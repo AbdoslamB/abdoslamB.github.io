@@ -1,0 +1,143 @@
+// Fixed header. Over the hero only the theme toggle shows (like the original
+// site); the navigation fades in once the visitor is past the hero.
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding-inline: var(--gutter) 1rem;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  @media (width <= 480px) {
+    gap: 0.25rem;
+    padding-inline: 1rem 0.25rem;
+  }
+
+  &[data-state='solid'] {
+    border-color: var(--border);
+    background: var(--glass);
+    backdrop-filter: blur(14px) saturate(140%);
+  }
+}
+
+.site-header__nav {
+  display: flex;
+  gap: clamp(0.5rem, 3vw, 2rem);
+  align-items: center;
+  min-width: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s;
+
+  [data-state='solid'] > & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.site-header__logo {
+  display: inline-flex;
+  flex: none;
+  align-items: baseline;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+// The full stop is one of the hero's dots, in all six colours.
+.site-header__logo-dot {
+  display: inline-block;
+  width: 0.3em;
+  height: 0.3em;
+  margin-left: 0.06em;
+  border-radius: 50%;
+  background: conic-gradient(
+    #ff2600,
+    #ff8000,
+    #ffd500,
+    #2d2,
+    #00bfff,
+    #c912ed,
+    #ff2600
+  );
+}
+
+.site-header__links {
+  display: flex;
+  gap: clamp(0rem, 2vw, 1.25rem);
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+  scrollbar-width: none;
+
+  a {
+    display: block;
+    padding: 0.4rem 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      background: var(--surface-hover);
+      color: var(--text);
+    }
+
+    // Four links plus the logo and toggle must fit a 360 px phone.
+    @media (width <= 480px) {
+      padding: 0.4rem 0.3rem;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+// A secondary control: a small icon with a 40 px tap area, no glow. The
+// background only appears on hover.
+.theme-toggle {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0.75rem;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: var(--surface-hover);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+:root[data-theme='dark'] .theme-toggle__sun,
+:root[data-theme='light'] .theme-toggle__moon {
+  display: none;
+}

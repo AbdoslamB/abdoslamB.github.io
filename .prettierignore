@@ -1,0 +1,7 @@
+dist
+.astro
+test-results
+playwright-report
+package-lock.json
+src/data/github.json
+public/googleee43c110fb3804f6.html

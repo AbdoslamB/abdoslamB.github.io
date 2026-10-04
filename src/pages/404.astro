@@ -1,0 +1,77 @@
+---
+import Base from '@/layouts/Base.astro';
+---
+
+<Base title="Page not found" noindex>
+  <main id="main" class="not-found">
+    <canvas class="not-found__dots" data-dots aria-hidden="true"></canvas>
+    <div class="not-found__content">
+      <p class="not-found__code">404</p>
+      <h1 class="page__title">This page drifted away</h1>
+      <p class="lead">The link may be old, or the address mistyped.</p>
+      <a class="button button--primary" href="/">
+        Back home
+      </a>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .not-found {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    padding: var(--header-height) var(--gutter);
+    text-align: center;
+  }
+
+  .not-found__dots {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .not-found__content {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+
+    a {
+      pointer-events: auto;
+    }
+  }
+
+  .not-found__code {
+    margin: 0;
+    background: var(--rainbow);
+    background-clip: text;
+    color: transparent;
+    font-size: clamp(4rem, 15vw, 8rem);
+    font-weight: 800;
+    line-height: 1;
+  }
+</style>
+
+<script>
+  import { DotField } from '@/lib/dots';
+
+  const canvas = document.querySelector<HTMLCanvasElement>('[data-dots]');
+  if (canvas) {
+    const field = new DotField(canvas);
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    field.setStill(still);
+    if (!still) field.start();
+    canvas.parentElement?.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      const rect = canvas.getBoundingClientRect();
+      field.setPointer(event.clientX - rect.left, event.clientY - rect.top);
+    });
+    canvas.parentElement?.addEventListener('pointerleave', () => {
+      field.clearPointer();
+    });
+  }
+</script>

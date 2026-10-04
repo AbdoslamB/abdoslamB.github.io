@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" width="1200" height="360" role="img" aria-label="Drifting coloured dots, as on the website hero">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="48%" r="55%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".07"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="card"><rect width="1200" height="360" rx="20"/></clipPath>
+  </defs>
+  <style>
+    /* Smooth, brisk drifting particle dynamics */
+    @keyframes path0 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(35px, -25px); }
+      66%  { transform: translate(55px, 15px); }
+      85%  { transform: translate(20px, 35px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path1 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(-30px, 25px); }
+      66%  { transform: translate(-50px, -10px); }
+      85%  { transform: translate(-20px, -30px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path2 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(25px, 30px); }
+      66%  { transform: translate(-15px, 45px); }
+      85%  { transform: translate(-35px, 15px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path3 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(-25px, -25px); }
+      66%  { transform: translate(20px, -45px); }
+      85%  { transform: translate(40px, -15px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path4 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(40px, -18px); }
+      66%  { transform: translate(20px, -38px); }
+      85%  { transform: translate(-18px, -20px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path5 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(-35px, -20px); }
+      66%  { transform: translate(-15px, -40px); }
+      85%  { transform: translate(25px, -15px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path6 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(30px, 25px); }
+      66%  { transform: translate(50px, 10px); }
+      85%  { transform: translate(25px, -20px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path7 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(-40px, 20px); }
+      66%  { transform: translate(-20px, 45px); }
+      85%  { transform: translate(20px, 25px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path8 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(20px, -35px); }
+      66%  { transform: translate(45px, -20px); }
+      85%  { transform: translate(30px, 15px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path9 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(-25px, 30px); }
+      66%  { transform: translate(10px, 45px); }
+      85%  { transform: translate(35px, 20px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path10 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(35px, 20px); }
+      66%  { transform: translate(15px, -30px); }
+      85%  { transform: translate(-20px, -15px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path11 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(-30px, -30px); }
+      66%  { transform: translate(25px, -20px); }
+      85%  { transform: translate(15px, 25px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path12 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(45px, 10px); }
+      66%  { transform: translate(25px, 35px); }
+      85%  { transform: translate(-15px, 20px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    @keyframes path13 {
+      0%   { transform: translate(0px, 0px); }
+      33%  { transform: translate(-35px, 15px); }
+      66%  { transform: translate(-15px, -35px); }
+      85%  { transform: translate(20px, -20px); }
+      100% { transform: translate(0px, 0px); }
+    }
+    .dot-0 { animation: path0 4.61s ease-in-out infinite -0.61s; }
+    .dot-1 { animation: path1 3.84s ease-in-out infinite -0.13s; }
+    .dot-2 { animation: path2 5.42s ease-in-out infinite -2.99s; }
+    .dot-3 { animation: path3 5.73s ease-in-out infinite -2.5s; }
+    .dot-4 { animation: path4 4.77s ease-in-out infinite -0.38s; }
+    .dot-5 { animation: path5 4.65s ease-in-out infinite -4.93s; }
+    .dot-6 { animation: path6 5.44s ease-in-out infinite -3.84s; }
+    .dot-7 { animation: path7 4.54s ease-in-out infinite -4.45s; }
+    .dot-8 { animation: path8 5.33s ease-in-out infinite -3.96s; }
+    .dot-9 { animation: path9 4.86s ease-in-out infinite -0.7s; }
+    .dot-10 { animation: path10 5.27s ease-in-out infinite -2.16s; }
+    .dot-11 { animation: path11 5.51s ease-in-out infinite -2.53s; }
+    .dot-12 { animation: path12 5.01s ease-in-out infinite -3.74s; }
+    .dot-13 { animation: path13 3.83s ease-in-out infinite -0.96s; }
+    .dot-14 { animation: path0 4.66s ease-in-out infinite -3.5s; }
+    .dot-15 { animation: path1 3.61s ease-in-out infinite -4.3s; }
+    .dot-16 { animation: path2 5.28s ease-in-out infinite -3.24s; }
+    .dot-17 { animation: path3 4.45s ease-in-out infinite -2.49s; }
+    .dot-18 { animation: path4 4.52s ease-in-out infinite -3.23s; }
+    .dot-19 { animation: path5 5.34s ease-in-out infinite -2.54s; }
+    .dot-20 { animation: path6 5.15s ease-in-out infinite -3.32s; }
+    .dot-21 { animation: path7 5.23s ease-in-out infinite -3.39s; }
+    .dot-22 { animation: path8 5.51s ease-in-out infinite -0.56s; }
+    .dot-23 { animation: path9 5.21s ease-in-out infinite -3.02s; }
+    .dot-24 { animation: path10 5.71s ease-in-out infinite -0.67s; }
+    .dot-25 { animation: path11 3.51s ease-in-out infinite -1.02s; }
+    .dot-26 { animation: path12 4.58s ease-in-out infinite -1.17s; }
+    .dot-27 { animation: path13 4.43s ease-in-out infinite -4.72s; }
+    .dot-28 { animation: path0 4.85s ease-in-out infinite -3.6s; }
+    .dot-29 { animation: path1 4.91s ease-in-out infinite -3.09s; }
+    .dot-30 { animation: path2 5.48s ease-in-out infinite -1.49s; }
+    .dot-31 { animation: path3 5.58s ease-in-out infinite -4.39s; }
+    .dot-32 { animation: path4 3.77s ease-in-out infinite -1.36s; }
+    .dot-33 { animation: path5 5.28s ease-in-out infinite -2.53s; }
+    .dot-34 { animation: path6 4.39s ease-in-out infinite -0.34s; }
+    .dot-35 { animation: path7 5.02s ease-in-out infinite -4.18s; }
+    .dot-36 { animation: path8 4.7s ease-in-out infinite -2.4s; }
+    .dot-37 { animation: path9 4.93s ease-in-out infinite -1.45s; }
+    .dot-38 { animation: path10 4.93s ease-in-out infinite -3.34s; }
+    .dot-39 { animation: path11 4.99s ease-in-out infinite -2.69s; }
+    .dot-40 { animation: path12 5.43s ease-in-out infinite -3.77s; }
+    .dot-41 { animation: path13 5.67s ease-in-out infinite -2.55s; }
+    .dot-42 { animation: path0 4.07s ease-in-out infinite -4.55s; }
+    .dot-43 { animation: path1 5.4s ease-in-out infinite -3.89s; }
+    .dot-44 { animation: path2 5.02s ease-in-out infinite -0.88s; }
+    .dot-45 { animation: path3 3.53s ease-in-out infinite -3.65s; }
+    .dot-46 { animation: path4 5.22s ease-in-out infinite -4.49s; }
+    .dot-47 { animation: path5 5.32s ease-in-out infinite -2.21s; }
+    .dot-48 { animation: path6 5.73s ease-in-out infinite -1.17s; }
+    .dot-49 { animation: path7 5.16s ease-in-out infinite -0.84s; }
+    .dot-50 { animation: path8 3.76s ease-in-out infinite -0.23s; }
+    .dot-51 { animation: path9 4.68s ease-in-out infinite -3.38s; }
+    .dot-52 { animation: path10 3.99s ease-in-out infinite -3.87s; }
+    .dot-53 { animation: path11 4.79s ease-in-out infinite -4.27s; }
+    .dot-54 { animation: path12 4.75s ease-in-out infinite -3.96s; }
+    .dot-55 { animation: path13 3.88s ease-in-out infinite -0.44s; }
+    .dot-56 { animation: path0 5.63s ease-in-out infinite -0.51s; }
+    .dot-57 { animation: path1 4.44s ease-in-out infinite -2.63s; }
+    .dot-58 { animation: path2 3.83s ease-in-out infinite -3.01s; }
+    .dot-59 { animation: path3 4.41s ease-in-out infinite -4.44s; }
+    .dot-60 { animation: path4 3.87s ease-in-out infinite -0.03s; }
+    .dot-61 { animation: path5 5.14s ease-in-out infinite -0.79s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+    }
+</style>
+
+  <g clip-path="url(#card)">
+    <rect width="1200" height="360" fill="#000"/>
+    <rect width="1200" height="360" fill="url(#glow)"/>
+
+    <!-- Pure drifting dots without any linkage lines -->
+    <g>
+      <circle class="dot-0" cx="188" cy="315" r="3.4" fill="#22dd22"/>
+      <circle class="dot-1" cx="676" cy="74" r="3.5" fill="#ff8000"/>
+      <circle class="dot-2" cx="133" cy="154" r="3.1" fill="#ff8000"/>
+      <circle class="dot-3" cx="577" cy="37" r="3.9" fill="#c912ed"/>
+      <circle class="dot-4" cx="406" cy="194" r="2.7" fill="#ff2600"/>
+      <circle class="dot-5" cx="979" cy="213" r="2.7" fill="#c912ed"/>
+      <circle class="dot-6" cx="137" cy="149" r="4.0" fill="#c912ed"/>
+      <circle class="dot-7" cx="586" cy="281" r="3.0" fill="#ff8000"/>
+      <circle class="dot-8" cx="1158" cy="112" r="2.8" fill="#ff2600"/>
+      <circle class="dot-9" cx="1085" cy="169" r="2.7" fill="#22dd22"/>
+      <circle class="dot-10" cx="228" cy="43" r="3.1" fill="#ff2600"/>
+      <circle class="dot-11" cx="142" cy="167" r="3.1" fill="#ffd500"/>
+      <circle class="dot-12" cx="982" cy="48" r="2.6" fill="#ff2600"/>
+      <circle class="dot-13" cx="185" cy="76" r="3.3" fill="#ffd500"/>
+      <circle class="dot-14" cx="853" cy="110" r="3.2" fill="#ff2600"/>
+      <circle class="dot-15" cx="1109" cy="79" r="3.7" fill="#22dd22"/>
+      <circle class="dot-16" cx="1028" cy="322" r="2.9" fill="#00bfff"/>
+      <circle class="dot-17" cx="1026" cy="296" r="3.8" fill="#22dd22"/>
+      <circle class="dot-18" cx="301" cy="203" r="2.6" fill="#ff8000"/>
+      <circle class="dot-19" cx="41" cy="300" r="3.6" fill="#c912ed"/>
+      <circle class="dot-20" cx="743" cy="168" r="2.9" fill="#00bfff"/>
+      <circle class="dot-21" cx="108" cy="217" r="3.1" fill="#22dd22"/>
+      <circle class="dot-22" cx="125" cy="150" r="3.5" fill="#ff2600"/>
+      <circle class="dot-23" cx="1154" cy="317" r="3.1" fill="#00bfff"/>
+      <circle class="dot-24" cx="681" cy="111" r="3.7" fill="#00bfff"/>
+      <circle class="dot-25" cx="248" cy="302" r="2.9" fill="#ffd500"/>
+      <circle class="dot-26" cx="466" cy="93" r="3.9" fill="#ffd500"/>
+      <circle class="dot-27" cx="398" cy="197" r="3.7" fill="#ffd500"/>
+      <circle class="dot-28" cx="891" cy="243" r="2.7" fill="#22dd22"/>
+      <circle class="dot-29" cx="269" cy="61" r="3.5" fill="#c912ed"/>
+      <circle class="dot-30" cx="1145" cy="159" r="2.6" fill="#c912ed"/>
+      <circle class="dot-31" cx="124" cy="209" r="3.2" fill="#22dd22"/>
+      <circle class="dot-32" cx="330" cy="152" r="3.3" fill="#c912ed"/>
+      <circle class="dot-33" cx="901" cy="166" r="3.9" fill="#ffd500"/>
+      <circle class="dot-34" cx="193" cy="145" r="3.6" fill="#ffd500"/>
+      <circle class="dot-35" cx="971" cy="271" r="3.9" fill="#ff8000"/>
+      <circle class="dot-36" cx="39" cy="80" r="2.9" fill="#c912ed"/>
+      <circle class="dot-37" cx="366" cy="280" r="2.6" fill="#00bfff"/>
+      <circle class="dot-38" cx="649" cy="308" r="3.1" fill="#c912ed"/>
+      <circle class="dot-39" cx="607" cy="200" r="2.9" fill="#ff8000"/>
+      <circle class="dot-40" cx="554" cy="62" r="2.7" fill="#c912ed"/>
+      <circle class="dot-41" cx="374" cy="319" r="2.8" fill="#00bfff"/>
+      <circle class="dot-42" cx="36" cy="252" r="2.8" fill="#22dd22"/>
+      <circle class="dot-43" cx="523" cy="30" r="2.8" fill="#ffd500"/>
+      <circle class="dot-44" cx="608" cy="247" r="3.2" fill="#c912ed"/>
+      <circle class="dot-45" cx="784" cy="333" r="3.7" fill="#00bfff"/>
+      <circle class="dot-46" cx="598" cy="253" r="3.0" fill="#ffd500"/>
+      <circle class="dot-47" cx="340" cy="195" r="3.9" fill="#00bfff"/>
+      <circle class="dot-48" cx="780" cy="248" r="3.3" fill="#ff8000"/>
+      <circle class="dot-49" cx="656" cy="81" r="3.2" fill="#00bfff"/>
+      <circle class="dot-50" cx="166" cy="286" r="3.6" fill="#00bfff"/>
+      <circle class="dot-51" cx="1045" cy="268" r="3.6" fill="#ff8000"/>
+      <circle class="dot-52" cx="979" cy="122" r="3.8" fill="#ffd500"/>
+      <circle class="dot-53" cx="629" cy="193" r="2.6" fill="#00bfff"/>
+      <circle class="dot-54" cx="88" cy="315" r="3.8" fill="#c912ed"/>
+      <circle class="dot-55" cx="437" cy="283" r="2.8" fill="#c912ed"/>
+      <circle class="dot-56" cx="924" cy="89" r="2.9" fill="#ffd500"/>
+      <circle class="dot-57" cx="738" cy="293" r="4.0" fill="#22dd22"/>
+      <circle class="dot-58" cx="117" cy="119" r="2.8" fill="#22dd22"/>
+      <circle class="dot-59" cx="132" cy="73" r="3.5" fill="#00bfff"/>
+      <circle class="dot-60" cx="39" cy="207" r="3.8" fill="#ffd500"/>
+      <circle class="dot-61" cx="1106" cy="199" r="3.1" fill="#ff8000"/>
+    </g>
+  </g>
+  <rect x=".5" y=".5" width="1199" height="359" rx="19.5" fill="none" stroke="#ffffff" stroke-opacity=".12"/>
+</svg>

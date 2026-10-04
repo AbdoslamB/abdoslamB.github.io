@@ -1,0 +1,59 @@
+# Build outputs (not committed to git)
+/build
+/docs
+
+# Dependency directories
+node_modules/
+
+# ESLint cache
+.eslintcache
+
+# Stylelint cache
+.stylelintcache
+
+# Coverage directory used by Jest
+/coverage
+
+# TypeScript compiled output
+/dist
+/out
+/ts-build
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment Variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Misc
+.DS_Store
+Thumbs.db
+/deprecated
+
+# Netlify configuration file
+.netlify
+
+# Astro
+.astro/
+
+# Playwright
+/test-results/
+/playwright-report/
+
+# Local-only tools (e.g. the release script); never pushed
+.local/

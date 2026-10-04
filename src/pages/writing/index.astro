@@ -1,0 +1,46 @@
+---
+import Icon from '@/components/Icon.astro';
+import PostCard from '@/components/PostCard.astro';
+import { site } from '@/config/site';
+import Base from '@/layouts/Base.astro';
+import { getPosts } from '@/lib/posts';
+
+const posts = await getPosts();
+// This page lists posts as soon as there is one. (The homepage section waits
+// for two; see showWriting in src/lib/posts.ts.)
+const ready = posts.length > 0;
+---
+
+<Base
+  title="Writing"
+  description={`Articles by ${site.name} on data science, forecasting and building tools.`}
+  ogImage="writing"
+  noindex={!ready}
+>
+  <main id="main" class="page">
+    <div class="container">
+      <header class="page__header">
+        <h1 class="page__title">Writing</h1>
+        {ready && (
+          <p class="page__meta">
+            <a class="text-link" href="/rss.xml">
+              <Icon name="rss" /> Subscribe via RSS
+            </a>
+          </p>
+        )}
+      </header>
+      {ready ? (
+        <div class="grid">
+          {posts.map((post) => (
+            <PostCard post={post} headingLevel="h2" />
+          ))}
+        </div>
+      ) : (
+        <p class="empty-state">
+          Posts are on the way. In the meantime, see my{' '}
+          <a href="/#projects">projects</a>.
+        </p>
+      )}
+    </div>
+  </main>
+</Base>

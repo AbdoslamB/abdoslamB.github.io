@@ -1,0 +1,46 @@
+---
+import { site } from '@/config/site';
+
+interface Props {
+  sections: { id: string; label: string }[];
+}
+
+const { sections } = Astro.props;
+---
+
+<!-- The track is taller than the screen; the hero stays pinned inside it while
+     the visitor scrolls through the extra "hold" distance. -->
+<div class="hero-track" id="top" data-hero-track>
+  <section class="hero" data-hero aria-labelledby="hero-name">
+    <canvas class="hero__dots" data-dots aria-hidden="true"></canvas>
+    <div class="hero__content">
+      <h1 id="hero-name" class="hero__name">
+        {site.name}
+      </h1>
+      <p class="hero__title">{site.title}</p>
+
+      <nav class="hero__jump" aria-label="Sections">
+        {sections.map(({ id, label }) => (
+          <a class="hero__jump-link" href={`#${id}`} data-jump={id}>
+            {label}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    <a
+      class="hero__hint"
+      href="#about"
+      data-jump="about"
+      aria-label="Scroll to About"
+    >
+      <span class="hero__hint-mouse" aria-hidden="true">
+        <span class="hero__hint-fill"></span>
+        <span class="hero__hint-wheel"></span>
+      </span>
+      <span class="hero__hint-text" aria-hidden="true">
+        Scroll
+      </span>
+    </a>
+  </section>
+</div>

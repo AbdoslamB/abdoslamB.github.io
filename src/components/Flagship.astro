@@ -1,0 +1,59 @@
+---
+import Icon from '@/components/Icon.astro';
+import ProjectStats from '@/components/ProjectStats.astro';
+import { type ProjectView, visibleTags } from '@/lib/projects';
+
+interface Props {
+  project: ProjectView;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="flagship">
+  <div class="flagship__body">
+    <h3 class="flagship__title">{project.title}</h3>
+    <ProjectStats project={project} />
+    <p class="flagship__summary">{project.summary}</p>
+    {project.highlights && (
+      <ul class="flagship__highlights">
+        {project.highlights.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    )}
+    <ul class="tags" aria-label="Topics">
+      {visibleTags(project.tags).map((tag) => (
+        <li>{tag}</li>
+      ))}
+    </ul>
+    <div class="flagship__actions">
+      {project.links?.map(({ label, href }, index) => (
+        <a
+          class:list={['button', index === 0 && 'button--primary']}
+          href={href}
+          rel="noopener"
+        >
+          {label}
+          <Icon name="external" />
+        </a>
+      ))}
+      <a class="button" href={project.url} rel="noopener">
+        <Icon name="github" />
+        Source
+      </a>
+    </div>
+  </div>
+  {project.image && (
+    <figure class="flagship__media">
+      <img
+        src={project.image.src}
+        alt={project.image.alt}
+        width={project.image.width}
+        height={project.image.height}
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+  )}
+</article>

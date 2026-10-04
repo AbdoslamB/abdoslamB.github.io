@@ -1,0 +1,54 @@
+---
+import DigDeeper from '@/components/DigDeeper.astro';
+import Icon from '@/components/Icon.astro';
+import Base from '@/layouts/Base.astro';
+import { formatDate, getPosts, type Post, readingMinutes } from '@/lib/posts';
+import { render } from 'astro:content';
+
+export const getStaticPaths = async () =>
+  (await getPosts()).map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={`writing/${post.id}`}
+  ogType="article"
+  publishedTime={post.data.date}
+  updatedTime={post.data.updated}
+  citations={post.data.sources.flatMap(({ url }) => (url ? [url] : []))}
+  noindex={post.data.draft}
+>
+  <main id="main" class="page">
+    <article class="container narrow">
+      <a class="back-link" href="/writing/">
+        <Icon name="arrow" /> All posts
+      </a>
+      <header class="page__header">
+        <h1 class="page__title">{post.data.title}</h1>
+        <p class="page__meta">
+          <time datetime={post.data.date.toISOString()}>
+            {formatDate(post.data.date)}
+          </time>
+          <span aria-hidden="true">·</span>
+          {readingMinutes(post.body)} min read
+          {post.data.draft && <span class="badge">Draft</span>}
+        </p>
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+      <DigDeeper sources={post.data.sources} />
+    </article>
+  </main>
+</Base>

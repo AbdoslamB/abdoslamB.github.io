@@ -1,0 +1,205 @@
+// Hero and the scroll "hold". .hero-track is taller than the screen by
+// --hold; the hero is sticky inside it, so it stays put while that extra
+// distance is scrolled. src/scripts/home.ts writes the progress through the
+// hold (0–1) to --p, which fades the content here and scatters the dots.
+// The hold lengths are documented in the README.
+
+.hero-track {
+  --hold: 0px;
+
+  position: relative;
+  height: calc(100vh + var(--hold));
+  height: calc(100svh + var(--hold));
+}
+
+// The hold only exists with JavaScript; without it the page scrolls normally.
+.js .hero-track {
+  --hold: 150vh;
+  --hold: 150svh;
+
+  @media (pointer: coarse), (width <= 768px) {
+    --hold: 80vh;
+    --hold: 80svh;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    --hold: 40vh;
+    --hold: 40svh;
+  }
+}
+
+.hero {
+  --p: 0;
+
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  padding: var(--header-height) var(--gutter) 5rem;
+  background-color: var(--bg);
+  text-align: center;
+  transition: background-color 0.5s linear;
+}
+
+.hero[data-faded] :is(.hero__content, .hero__hint) {
+  visibility: hidden;
+}
+
+.hero__dots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  opacity: clamp(0, calc(1 - var(--p) * 1.4), 1);
+  transform: translateY(calc(var(--p) * -6vh)) scale(calc(1 - var(--p) * 0.06));
+
+  // Clicks on empty space fall through to the dots (to add more), as before.
+  pointer-events: none;
+
+  a {
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+  }
+}
+
+.hero__name {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(2.75rem, 7vw + 0.5rem, 4.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.hero__title {
+  margin: 1rem 0 2.25rem;
+  color: var(--text-soft);
+  font-size: clamp(1.1rem, 1.5vw + 0.75rem, 1.6rem);
+}
+
+.hero__jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.hero__jump-link {
+  padding: 0.7rem 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--glass);
+  backdrop-filter: blur(6px);
+  color: var(--text);
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.1s ease;
+
+  // The original buttons' hover glow.
+  &:hover {
+    background: var(--surface-hover);
+    box-shadow: 0 0 0.75rem 0.75rem var(--glow);
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+
+  @media (width <= 480px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+// Scroll hint: a small mouse outline that fills as the hold progresses. It's
+// the main cue that the page continues, so it stays visible but light. The
+// label keeps the muted text colour (not extra transparency) to hold AAA
+// contrast.
+.hero__hint {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  opacity: clamp(0, calc(1 - var(--p) * 1.2), 1);
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+.hero__hint-mouse {
+  position: relative;
+  width: 1.125rem;
+  height: 1.8rem;
+  overflow: hidden;
+  border: 1.5px solid currentcolor;
+  border-radius: 0.75rem;
+}
+
+.hero__hint-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--rainbow);
+  opacity: 0.55;
+  transform: scaleY(var(--p));
+  transform-origin: top;
+}
+
+.hero__hint-wheel {
+  position: absolute;
+  top: 0.3rem;
+  left: 50%;
+  width: 0.1875rem;
+  height: 0.375rem;
+  margin-left: -0.0938rem;
+  border-radius: 1rem;
+  background: currentcolor;
+  animation: hint-wheel 1.8s ease-in-out infinite;
+}
+
+@keyframes hint-wheel {
+  0%,
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  80%,
+  100% {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@media (height <= 560px) {
+  .hero__hint {
+    display: none;
+  }
+}

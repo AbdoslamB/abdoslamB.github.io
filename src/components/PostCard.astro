@@ -1,0 +1,35 @@
+---
+import { formatDate, type Post, readingMinutes } from '@/lib/posts';
+import { visibleTags } from '@/lib/projects';
+
+interface Props {
+  post: Post;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { post, headingLevel: Heading = 'h3' } = Astro.props;
+---
+
+<article class="card post-card">
+  <p class="post-card__meta">
+    <time datetime={post.data.date.toISOString()}>
+      {formatDate(post.data.date)}
+    </time>
+    <span aria-hidden="true">·</span>
+    {readingMinutes(post.body)} min read
+    {post.data.draft && <span class="badge">Draft</span>}
+  </p>
+  <Heading class="card__title">
+    <a class="card__link" href={`/writing/${post.id}/`}>
+      {post.data.title}
+    </a>
+  </Heading>
+  <p class="card__summary">{post.data.description}</p>
+  {post.data.tags.length > 0 && (
+    <ul class="post-card__tags" aria-label="Topics">
+      {visibleTags(post.data.tags).map((tag) => (
+        <li>{tag}</li>
+      ))}
+    </ul>
+  )}
+</article>

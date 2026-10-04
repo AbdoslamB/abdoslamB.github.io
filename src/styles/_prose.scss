@@ -1,0 +1,292 @@
+// Inner pages (writing index, posts, 404) sit below the fixed header.
+.page {
+  padding-block: calc(var(--header-height) + clamp(2.5rem, 6vw, 4.5rem))
+    clamp(4rem, 8vw, 6rem);
+}
+
+.page__header {
+  margin-bottom: 2.5rem;
+}
+
+.page__title {
+  margin: 0 0 1rem;
+  font-size: clamp(2.1rem, 4vw + 1rem, 3.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.page__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.back-link {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+
+  .icon {
+    transform: rotate(180deg);
+  }
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+.narrow {
+  max-width: 44rem;
+}
+
+.prose {
+  color: var(--text-soft);
+  font-size: 1.1rem;
+  line-height: 1.75;
+
+  > * + * {
+    margin-top: 1.25em;
+  }
+
+  h2,
+  h3 {
+    margin-top: 2.25em;
+    color: var(--text);
+    line-height: 1.25;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p,
+  ul,
+  ol {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: var(--text);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  strong {
+    color: var(--text);
+  }
+
+  li + li {
+    margin-top: 0.4em;
+  }
+
+  blockquote {
+    margin-inline: 0;
+    padding-left: 1rem;
+    border-left: 3px solid;
+    border-image: var(--rainbow) 1;
+    color: var(--text);
+  }
+
+  code {
+    padding: 0.1em 0.35em;
+    border-radius: 0.3rem;
+    background: var(--surface-hover);
+    font-size: 0.9em;
+  }
+
+  pre {
+    overflow-x: auto;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+
+    code {
+      padding: 0;
+      background: none;
+    }
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  th,
+  td {
+    padding: 0.55rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  th {
+    color: var(--text);
+  }
+}
+
+.empty-state {
+  padding: 2rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+
+// "Dig deeper": a post's references, collapsed and deliberately quiet so it
+// doesn't compete with the article.
+.dig-deeper {
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+
+  // Smooth open/close in browsers that can animate to `auto` height; others
+  // simply open instantly.
+  interpolate-size: allow-keywords;
+
+  &::details-content {
+    block-size: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+      block-size 0.3s ease,
+      opacity 0.3s ease,
+      content-visibility 0.3s allow-discrete;
+  }
+
+  &[open]::details-content {
+    block-size: auto;
+    opacity: 1;
+  }
+
+  summary {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0.25rem 0;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    list-style: none;
+    user-select: none;
+    transition: color 0.2s ease;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:hover {
+      color: var(--text);
+    }
+  }
+}
+
+.dig-deeper__count {
+  min-width: 1.4rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: var(--surface-hover);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.dig-deeper__chevron {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.25s ease;
+
+  [open] > summary > & {
+    transform: rotate(90deg);
+  }
+}
+
+.dig-deeper__list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0.85rem 0 0.25rem;
+  padding: 0;
+  list-style: none;
+
+  a {
+    color: var(--text-muted);
+    text-decoration: none;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+  }
+
+  .icon {
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: 0.3rem;
+    vertical-align: -0.05em;
+    opacity: 0.7;
+  }
+}
+
+// Inline line-art illustrations in posts. Strokes use currentColor, so they
+// follow the theme; accents use the six dot colours.
+.prose .illustration {
+  margin: 2.5rem auto;
+  color: var(--text-soft);
+
+  svg {
+    width: 100%;
+    max-width: 26rem;
+    height: auto;
+    margin-inline: auto;
+  }
+
+  .ill-bg {
+    fill: var(--bg);
+    transition: fill 0.5s linear;
+  }
+}
+
+// Smaller illustrations inside an article: on the left with the text
+// flowing beside them. On narrow screens there's no room for text alongside,
+// so they stack, centred and a little smaller.
+.prose .illustration--inline {
+  float: left;
+  width: min(38%, 14rem);
+  margin: 0.4rem 1.75rem 0.75rem 0;
+
+  svg {
+    max-width: none;
+  }
+
+  @media (width <= 640px) {
+    float: none;
+    width: min(70%, 18rem);
+    margin: 2rem auto 1.5rem;
+  }
+}
+
+// New sections and lists never wrap around an earlier illustration.
+.prose h2,
+.prose ol,
+.prose ul {
+  clear: both;
+}

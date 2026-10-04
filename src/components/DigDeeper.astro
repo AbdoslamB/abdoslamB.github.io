@@ -1,0 +1,51 @@
+---
+// A post's references, collapsed by default at the end of the article.
+// Uses native <details>, so it opens with a click, Enter or Space and works
+// without JavaScript; screen readers announce it as expandable.
+import Icon from '@/components/Icon.astro';
+
+interface Props {
+  sources: { title: string; url?: string }[];
+}
+
+const { sources } = Astro.props;
+---
+
+{sources.length > 0 && (
+  <details class="dig-deeper">
+    <summary>
+      <span>Dig deeper</span>
+      <span class="dig-deeper__count">{sources.length}</span>
+      <svg
+        class="dig-deeper__chevron"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9 6l6 6-6 6"
+        />
+      </svg>
+    </summary>
+    <ul class="dig-deeper__list">
+      {sources.map(({ title, url }) =>
+        url ? (
+          <li>
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              {title}
+              <Icon name="external" />
+              <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </li>
+        ) : (
+          <li>{title}</li>
+        ),
+      )}
+    </ul>
+  </details>
+)}

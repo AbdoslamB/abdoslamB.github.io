@@ -1,0 +1,51 @@
+---
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import { site } from '@/config/site';
+import { getPosts, showWriting } from '@/lib/posts';
+
+interface Props {
+  isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
+const posts = await getPosts();
+
+// On the home page links jump within the page; elsewhere they go home first.
+const prefix = isHome ? '' : '/';
+const sections = [
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  ...(showWriting(posts) ? [{ id: 'writing', label: 'Writing' }] : []),
+  { id: 'contact', label: 'Contact' },
+];
+// Logo: lowercase initials followed by a rainbow dot ("ab.").
+const initials = site.name
+  .split(' ')
+  .map((part) => part[0])
+  .join('')
+  .toLowerCase();
+---
+
+<header class="site-header" data-state={isHome ? 'hero' : 'solid'}>
+  <nav class="site-header__nav" aria-label="Main">
+    <a
+      class="site-header__logo"
+      href={isHome ? '#top' : '/'}
+      data-jump={isHome ? 'top' : undefined}
+      aria-label={`${site.name}, home`}
+    >
+      {initials}
+      <span class="site-header__logo-dot" aria-hidden="true"></span>
+    </a>
+    <ul class="site-header__links">
+      {sections.map(({ id, label }) => (
+        <li>
+          <a href={`${prefix}#${id}`} data-jump={isHome ? id : undefined}>
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+  <ThemeToggle />
+</header>
