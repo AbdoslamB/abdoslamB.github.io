@@ -151,6 +151,26 @@
   background: #0d1117;
 }
 
+// Theme-matched recordings stacked in one cell; only the current theme's
+// shows. Without JavaScript, only the <noscript> recording is shown.
+.demo {
+  display: grid;
+}
+
+.demo__video {
+  display: block;
+  grid-area: 1 / 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+}
+
+[data-theme='dark'] .demo__video--light,
+[data-theme='light'] .demo__video--dark,
+:root:not(.js) .demo__video[data-src] {
+  display: none;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));

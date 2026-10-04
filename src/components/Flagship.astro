@@ -8,6 +8,8 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const { video } = project;
+const themes = ['light', 'dark'] as const;
 ---
 
 <article class="flagship">
@@ -44,16 +46,58 @@ const { project } = Astro.props;
       </a>
     </div>
   </div>
-  {project.image && (
-    <figure class="flagship__media">
-      <img
-        src={project.image.src}
-        alt={project.image.alt}
-        width={project.image.width}
-        height={project.image.height}
-        loading="lazy"
-        decoding="async"
-      />
+  {video ? (
+    // One recording per theme, stacked; CSS shows the one for the current
+    // theme. Files are attached by scripts/demo.ts only when needed.
+    <figure class="flagship__media demo" data-demo>
+      {themes.map((theme) => (
+        <video
+          class={`demo__video demo__video--${theme}`}
+          data-theme-video={theme}
+          data-src={video[theme].src}
+          data-poster={video[theme].poster}
+          width={video.width}
+          height={video.height}
+          aria-label={video.alt}
+          muted
+          loop
+          playsinline
+          disablepictureinpicture
+          preload="none"
+        />
+      ))}
+      <noscript>
+        <video
+          class="demo__video"
+          src={video.dark.src}
+          poster={video.dark.poster}
+          width={video.width}
+          height={video.height}
+          aria-label={video.alt}
+          controls
+          muted
+          loop
+          playsinline
+          preload="none"
+        />
+      </noscript>
     </figure>
+  ) : (
+    project.image && (
+      <figure class="flagship__media">
+        <img
+          src={project.image.src}
+          alt={project.image.alt}
+          width={project.image.width}
+          height={project.image.height}
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    )
   )}
 </article>
+
+<script>
+  import '@/scripts/demo';
+</script>

@@ -20,6 +20,22 @@ export interface FeaturedProject {
   tags: string[];
   links?: ProjectLink[];
   image?: { src: string; alt: string; width: number; height: number };
+  // A looping screen recording, one per theme so it matches the site. Both
+  // must share the same timing: a theme switch carries on mid-loop. Shown
+  // instead of `image` when set.
+  video?: {
+    alt: string;
+    width: number;
+    height: number;
+    light: DemoVideo;
+    dark: DemoVideo;
+  };
+}
+
+export interface DemoVideo {
+  src: string;
+  // A still of the first frame, shown until the video plays.
+  poster: string;
 }
 
 export const flagship: FeaturedProject = {
@@ -40,11 +56,18 @@ export const flagship: FeaturedProject = {
       href: 'https://github.com/AbdoslamB/InkDoc/releases/latest',
     },
   ],
-  image: {
-    src: '/projects/inkdoc-demo.gif',
+  video: {
     alt: 'InkDoc converting a document to Markdown in the desktop app',
     width: 1200,
     height: 750,
+    light: {
+      src: '/projects/inkdoc-demo-light.mp4',
+      poster: '/projects/inkdoc-demo-light.webp',
+    },
+    dark: {
+      src: '/projects/inkdoc-demo-dark.mp4',
+      poster: '/projects/inkdoc-demo-dark.webp',
+    },
   },
 };
 

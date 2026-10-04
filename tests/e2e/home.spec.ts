@@ -121,6 +121,28 @@ test('theme choice survives a reload', async ({ page }) => {
   await expect(root).toHaveAttribute('data-theme', 'light');
 });
 
+test('the demo loads only near the screen and follows the theme', async ({
+  page,
+}) => {
+  const demo = page.locator('[data-demo]');
+  const dark = demo.locator('video[data-theme-video="dark"]');
+  const light = demo.locator('video[data-theme-video="light"]');
+  // Nothing downloads while the visitor is on the hero.
+  await expect(dark).not.toHaveAttribute('src', /./);
+
+  await page.goto('/#projects');
+  await expect(dark).toHaveAttribute('src', /inkdoc-demo-dark\.mp4$/);
+  await expect(dark).toBeVisible();
+  await expect(light).toBeHidden();
+  // The other theme's recording waits until it's needed.
+  await expect(light).not.toHaveAttribute('src', /./);
+
+  await page.getByRole('button', { name: 'Dark mode' }).click();
+  await expect(light).toHaveAttribute('src', /inkdoc-demo-light\.mp4$/);
+  await expect(light).toBeVisible();
+  await expect(dark).toBeHidden();
+});
+
 test('header navigation appears only after the hero', async ({ page }) => {
   const nav = page.getByRole('navigation', { name: 'Main' });
   await expect(nav).toBeHidden();
@@ -253,7 +275,7 @@ test('projects show only what helps: three tags, meaningful stars', async ({
   await expect(projects.getByText('All open source')).toBeVisible();
   await expect(projects.getByText(/Flagship project/i)).toHaveCount(0);
   await expect(projects.getByText(/Updated/)).toHaveCount(0);
-  await expect(projects.locator('.flagship img')).toHaveCount(1); // demo only
+  await expect(projects.locator('.flagship video:visible')).toHaveCount(1); // demo only
 
   for (const list of await projects.locator('.tags').all()) {
     expect(await list.locator('li').count()).toBeLessThanOrEqual(3);
