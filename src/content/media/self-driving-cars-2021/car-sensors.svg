@@ -1,0 +1,24 @@
+<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg">
+<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M24 148h272" stroke-dasharray="14 12" opacity=".45"/>
+<path d="M18 96h24M10 110h32M22 124h18" opacity=".55"/>
+<path d="M58 124v-22c0-9 6-15 15-16l30-3 26-24c5-5 11-7 18-7h48c8 0 15 3 20 9l20 22 20 3c9 1 15 8 15 17v21"/>
+<path d="M58 124h20M126 124h80M254 124h16"/>
+<path d="M136 60l-18 20h50V60zM176 60v20h52l-16-18c-1.5-1.4-3.6-2-6-2z"/>
+<path d="M172 86v24" opacity=".5"/>
+</g>
+<g fill="none" stroke-width="3" stroke-linecap="round">
+<path d="M161 40a10 10 0 0 1 20 0" stroke="#00bfff"/>
+<path d="M152 40a19 19 0 0 1 38 0" stroke="#22dd22"/>
+<path d="M143 40a28 28 0 0 1 56 0" stroke="#ffd500"/>
+</g>
+<rect x="163" y="43" width="16" height="9" rx="3" fill="#c912ed"/>
+<circle cx="262" cy="96" r="5" fill="#ffd500"/>
+<rect x="60" y="94" width="7" height="9" rx="2" fill="#ff2600"/>
+<g stroke="currentColor" stroke-width="3">
+<circle class="ill-bg" cx="102" cy="124" r="20"/>
+<circle class="ill-bg" cx="230" cy="124" r="20"/>
+</g>
+<circle cx="102" cy="124" r="7" fill="currentColor"/>
+<circle cx="230" cy="124" r="7" fill="currentColor"/>
+</svg>

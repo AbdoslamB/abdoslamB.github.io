@@ -78,6 +78,14 @@
     margin-bottom: 0;
   }
 
+  // A post's closing line: <p class="sign-off">Thanks for reading.</p>
+  .sign-off {
+    margin-top: 2em;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
   a {
     color: var(--text);
     text-decoration-thickness: 1px;
@@ -262,6 +270,67 @@
   .ill-bg {
     fill: var(--bg);
     transition: fill 0.5s linear;
+  }
+
+  // Text inside diagrams. Sizes are in viewBox units, so they scale with it.
+  .ill-label,
+  .ill-note {
+    fill: currentcolor;
+    font-family: var(--font);
+  }
+
+  .ill-label {
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .ill-note {
+    font-size: 8px;
+    opacity: 0.7;
+  }
+
+  // Dashes that march along their path, for data on the move.
+  .ill-flow {
+    stroke-dasharray: 4 5;
+    animation: ill-flow 0.9s linear infinite;
+  }
+
+  // Something that could be there: it fades in and out.
+  .ill-breathe {
+    animation: ill-breathe 3s ease-in-out infinite;
+  }
+
+  // Moving parts (SVG <animate> elements) go in .ill-motion, and .ill-still
+  // holds the frame to show instead when motion is reduced.
+  .ill-still {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ill-flow,
+    .ill-breathe {
+      animation: none;
+    }
+
+    .ill-motion {
+      display: none;
+    }
+
+    .ill-still {
+      display: inline;
+    }
+  }
+}
+
+@keyframes ill-flow {
+  to {
+    stroke-dashoffset: -9;
+  }
+}
+
+@keyframes ill-breathe {
+  50% {
+    opacity: 0.3;
   }
 }
 

@@ -32,10 +32,14 @@ test('hero shows the name, title, sections and dots', async ({ page }) => {
   await expect(
     page.getByText('Data Scientist · Business Analyst'),
   ).toBeVisible();
+  // Writing joins the buttons once enough posts are published (see
+  // src/lib/posts.ts), so expect it exactly when the section is on the page.
+  const hasWriting = (await page.locator('#writing').count()) > 0;
   const jump = page.getByRole('navigation', { name: 'Sections' });
   await expect(jump.getByRole('link')).toHaveText([
     'About',
     'Projects',
+    ...(hasWriting ? ['Writing'] : []),
     'Contact',
   ]);
   const canvas = page.locator('[data-dots]');
@@ -132,9 +136,13 @@ test('header navigation appears only after the hero', async ({ page }) => {
 });
 
 test('draft posts are not published', async ({ page }) => {
-  await expect(page.locator('#writing')).toHaveCount(0);
+  // A draft has no page, and nothing on the homepage is marked as a draft.
   const response = await page.request.get('/writing/building-inkdoc/');
   expect(response.status()).toBe(404);
+  await expect(page.locator('.badge', { hasText: 'Draft' })).toHaveCount(0);
+  await expect(page.locator('a[href="/writing/building-inkdoc/"]')).toHaveCount(
+    0,
+  );
 });
 
 test('page metadata and share image are in place', async ({ page }) => {

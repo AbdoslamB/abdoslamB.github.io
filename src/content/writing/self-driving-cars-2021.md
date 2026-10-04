@@ -1,15 +1,13 @@
 ---
-title: 'Self-Driving Cars Are Coming — So Is a Privacy Problem'
+title: "Self-Driving Cars Are Coming — So Are the Questions Nobody's Answered"
 description: 'Why self-driving cars could save thousands of lives, nine ways they could be watching you, and the big bets, bold claims.'
 date: 2021-11-08
 tags: ['Self-driving cars', 'AI', 'Privacy']
 sources:
-  - title: 'Best cars of the future — Top 10 Websites'
-    url: 'https://www.top10websites.com/best-cars-of-the-future'
-  - title: 'Flying cars (2017) — Business Insider'
-    url: 'https://www.businessinsider.com/flyover-car-2017-1/'
   - title: 'Self-driving car dilemmas reveal that moral choices are not universal — Nature'
     url: 'https://www.nature.com/articles/d41586-018-07135-0'
+  - title: 'Flying cars (2017) — Business Insider'
+    url: 'https://www.businessinsider.com/flyover-car-2017-1/'
   - title: 'Traffic Safety Facts 2016 Data — NHTSA'
     url: 'https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/812456'
   - title: 'Ford to Sell Driverless Cars to Public by 2025, CEO Says — Bloomberg'
@@ -31,32 +29,7 @@ featured: true
 draft: false
 ---
 
-<figure class="illustration">
-<svg viewBox="0 0 320 170" role="img" aria-label="A cartoon car driving along a road, with radar waves coming from a sensor on its roof" xmlns="http://www.w3.org/2000/svg">
-<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-<path d="M24 148h272" stroke-dasharray="14 12" opacity=".45"/>
-<path d="M18 96h24M10 110h32M22 124h18" opacity=".55"/>
-<path d="M58 124v-22c0-9 6-15 15-16l30-3 26-24c5-5 11-7 18-7h48c8 0 15 3 20 9l20 22 20 3c9 1 15 8 15 17v21"/>
-<path d="M58 124h20M126 124h80M254 124h16"/>
-<path d="M136 60l-18 20h50V60zM176 60v20h52l-16-18c-1.5-1.4-3.6-2-6-2z"/>
-<path d="M172 86v24" opacity=".5"/>
-</g>
-<g fill="none" stroke-width="3" stroke-linecap="round">
-<path d="M161 40a10 10 0 0 1 20 0" stroke="#00bfff"/>
-<path d="M152 40a19 19 0 0 1 38 0" stroke="#22dd22"/>
-<path d="M143 40a28 28 0 0 1 56 0" stroke="#ffd500"/>
-</g>
-<rect x="163" y="43" width="16" height="9" rx="3" fill="#c912ed"/>
-<circle cx="262" cy="96" r="5" fill="#ffd500"/>
-<rect x="60" y="94" width="7" height="9" rx="2" fill="#ff2600"/>
-<g stroke="currentColor" stroke-width="3">
-<circle class="ill-bg" cx="102" cy="124" r="20"/>
-<circle class="ill-bg" cx="230" cy="124" r="20"/>
-</g>
-<circle cx="102" cy="124" r="7" fill="currentColor"/>
-<circle cx="230" cy="124" r="7" fill="currentColor"/>
-</svg>
-</figure>
+![A cartoon car driving along a road, with radar waves coming from a sensor on its roof](../media/self-driving-cars-2021/car-sensors.svg)
 
 ## The case for self-driving cars
 
@@ -72,26 +45,7 @@ But before we ask _will it crash?_, there's a quieter question worth asking: **w
 
 ## Nine ways your car could be watching you
 
-<figure class="illustration illustration--inline">
-<svg viewBox="34 10 276 150" role="img" aria-label="A shield with a padlock, between a location pin and an eye" xmlns="http://www.w3.org/2000/svg">
-<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-<path d="M160 18l52 18v40c0 34-23 58-52 72-29-14-52-38-52-72V36z"/>
-<path d="M145 84V72a15 15 0 0 1 30 0v12"/>
-<rect x="138" y="84" width="44" height="34" rx="6"/>
-<path d="M160 101v7"/>
-<path d="M90 82h10M220 82h10" stroke-dasharray="2 6" opacity=".6"/>
-</g>
-<circle cx="160" cy="98" r="4" fill="currentColor"/>
-<g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-<path d="M62 116c-14-18-22-31-22-43a22 22 0 0 1 44 0c0 12-8 25-22 43z" stroke="#ff2600"/>
-<path d="M238 82c18-26 46-26 64 0-18 26-46 26-64 0z" stroke="#c912ed"/>
-</g>
-<circle cx="62" cy="72" r="7" fill="#ffd500"/>
-<circle cx="270" cy="82" r="10" fill="#00bfff"/>
-<circle cx="270" cy="82" r="4" fill="currentColor"/>
-<path d="M136 152h48" stroke="#22dd22" stroke-width="3" stroke-linecap="round"/>
-</svg>
-</figure>
+![A shield with a padlock, between a location pin and an eye](../media/self-driving-cars-2021/privacy-shield.svg 'inline')
 
 Here's where it gets uncomfortable. The smarter a car gets, the more it quietly collects, and it's worth knowing where all that data can end up.
 
@@ -137,29 +91,7 @@ Either way, this isn't just an engineering problem. It's an ethics problem with 
 
 ## Not just cars: flying cars and self-flying helicopters
 
-<figure class="illustration illustration--inline">
-<svg viewBox="16 36 286 128" role="img" aria-label="A cartoon car with two rotors flying between clouds" xmlns="http://www.w3.org/2000/svg">
-<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-<path d="M28 56a12 12 0 0 1 21-8 15 15 0 0 1 28 4 9 9 0 0 1 2 16H32a8 8 0 0 1-4-12z" opacity=".45"/>
-<path d="M246 138a10 10 0 0 1 18-6 13 13 0 0 1 24 3 8 8 0 0 1 2 14h-40a7 7 0 0 1-4-11z" opacity=".45"/>
-<g transform="translate(0 -6)">
-<path d="M58 124v-22c0-9 6-15 15-16l30-3 26-24c5-5 11-7 18-7h48c8 0 15 3 20 9l20 22 20 3c9 1 15 8 15 17v21z"/>
-<path d="M136 60l-18 20h50V60zM176 60v20h52l-16-18c-1.5-1.4-3.6-2-6-2z"/>
-<path d="M92 83V58M240 83V58"/>
-</g>
-<path d="M118 146h28M170 146h44M138 158h36" opacity=".5"/>
-</g>
-<g fill="none" stroke-width="3" stroke-linecap="round">
-<ellipse cx="92" cy="50" rx="34" ry="5" stroke="#00bfff"/>
-<ellipse cx="240" cy="50" rx="34" ry="5" stroke="#c912ed"/>
-</g>
-<circle cx="92" cy="52" r="4" fill="currentColor"/>
-<circle cx="240" cy="52" r="4" fill="currentColor"/>
-<circle cx="262" cy="90" r="5" fill="#ffd500"/>
-<rect x="60" y="88" width="7" height="9" rx="2" fill="#ff2600"/>
-<path d="M98 132h20M214 132h20" stroke="#22dd22" stroke-width="3" stroke-linecap="round"/>
-</svg>
-</figure>
+![A cartoon car with two rotors flying between clouds](../media/self-driving-cars-2021/flying-car.svg 'inline')
 
 If self-driving cars sound futuristic, wait until we leave the road entirely.
 
@@ -171,47 +103,25 @@ Uber was chasing the same dream, with Airbus and Bell working on the vehicle des
 
 ## What Elon Musk was saying
 
-Elon Musk, as usual, had bold predictions. At the Code Conference, he said Tesla's cars would reach "a degree of autonomy that's greater than a human driving," possibly within two years. "Whether people want to buy it or not is another question," he added.
+Elon Musk, as usual, had bold predictions. At the Code Conference, he said Tesla's cars would reach a level of autonomy greater than a human driving, possibly within two years, though he added that whether people would actually want to buy one was a separate question.
 
-His bigger bet was on full autonomy:
+His bigger bet was on full autonomy: that within about five years, most miles driven would happen with nobody in the car at all.
 
-> "Probably within five years, the majority of miles will be driven with no one in the car. You won't need to have a human in the car."
-
-Musk argued there's "a fundamental misconception that self-driving makes roads dangerous." Autonomous cars, he said, will save far more people than human drivers kill: they react faster, and they're never drunk or distracted by their phones.
+Musk argued that it's a misconception that self-driving makes roads more dangerous. Autonomous cars, he said, will save far more people than human drivers kill: they react faster, and they're never drunk or distracted by their phones.
 
 He also admitted Autopilot wasn't perfect. Tesla once had to push out an update because the system was damaging cars when it braked during highway descents. Since then, he said, Autopilot had improved enough to operate on all three lanes of a highway, though Tesla still required the driver's explicit approval before using it on public roads.
 
 ## Who's hitting the brakes
 
-<figure class="illustration illustration--inline">
-<svg viewBox="84 6 214 158" role="img" aria-label="A traffic light next to a judge's gavel" xmlns="http://www.w3.org/2000/svg">
-<g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-<rect x="92" y="14" width="56" height="124" rx="14"/>
-<path d="M120 138v16M102 156h36"/>
-<g transform="rotate(-35 222 78)">
-<rect x="188" y="60" width="68" height="30" rx="7"/>
-<path d="M202 60v30M242 60v30"/>
-<rect x="218" y="90" width="8" height="58" rx="3"/>
-</g>
-<rect x="190" y="140" width="80" height="14" rx="4"/>
-</g>
-<circle cx="120" cy="42" r="12" fill="#ff2600"/>
-<circle cx="120" cy="76" r="12" fill="#ffd500"/>
-<circle cx="120" cy="110" r="12" fill="#22dd22"/>
-<g fill="none" stroke-width="3" stroke-linecap="round">
-<path d="M270 30l12-8M276 46l14-2" stroke="#ff8000"/>
-<path d="M176 126l-10 6" stroke="#00bfff"/>
-</g>
-</svg>
-</figure>
+![A traffic light next to a judge's gavel](../media/self-driving-cars-2021/traffic-law.svg 'inline')
 
 Not everyone was sold. Data from IHS Automotive suggested self-driving cars and trucks could be on U.S. roads in the next four years, with almost 16.9 million autonomous trucks and commercial vehicles by 2025. And the auto industry was grabbing all of that data to push its products.
 
-Ford ran its own experiment: employees drove their own cars around while drinking beer and ice cream, logging their experiences on a dashboard camera. Ford said human drivers would remain in the driver's seat, providing "the ultimate level of control."
+Ford ran its own experiment: employees drove their own cars around while drinking beer and ice cream, logging their experiences on a dashboard camera. Ford said human drivers would remain in the driver's seat, keeping full control over the vehicle.
 
-David Glazier, an attorney with the Center for Automotive Research, was not impressed. "I was absolutely flabbergasted," he said. "It's a disregard for safety. It's willful ignorance." How do you make sure these cars can interact with every other vehicle on the road? How do you test them in real-world situations? His verdict: "The current technology is not safe by any stretch of the imagination."
+David Glazier, an attorney with the Center for Automotive Research, was not impressed. He said he was stunned by it, calling it a disregard for safety and willful ignorance. How do you make sure these cars can interact with every other vehicle on the road? How do you test them in real-world situations? His verdict: the current technology wasn't safe by any stretch of the imagination.
 
-Still, he didn't think the public had made up its mind. "Most people seem to be in the middle," he said. "They're cautiously optimistic."
+Still, he didn't think the public had made up its mind. He placed most people somewhere in the middle: cautiously optimistic, not fully sold.
 
 Then there's regulation. Who regulates these cars: local municipalities, or states? Who's liable when you get into an accident: you, or your car maker? California made a start with its Self-Driving Vehicle Law, in effect since 2015, which requires manufacturers to submit their testing and monitoring reports to the DMV on request. The bigger questions were still wide open.
 
@@ -221,4 +131,4 @@ There's a fun detail in the movie _Drive_: its famous car chase was filmed from 
 
 Whether that ride is years away or already parked in someone's driveway, the safety case for self-driving cars is a strong one. The open question is whether the companies building them will take your privacy as seriously as their crash-test numbers.
 
-_Thanks for riding along._
+<p class="sign-off">Thanks for riding along.</p>

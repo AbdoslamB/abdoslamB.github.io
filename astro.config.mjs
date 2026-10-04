@@ -1,7 +1,10 @@
 // @ts-check
+import { satteri } from '@astrojs/markdown-satteri';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import { readdirSync, readFileSync } from 'node:fs';
+
+import { inlineSvgImages } from './src/lib/svg-media.ts';
 
 // Until a post is published, /writing/ is a placeholder that shouldn't be in
 // the sitemap.
@@ -19,6 +22,8 @@ export default defineConfig({
   // The stylesheet is ~4 KB gzipped; inlining it saves a render-blocking
   // request on first visit.
   build: { inlineStylesheets: 'always' },
+  // SVG diagrams referenced from posts are inlined (see src/lib/svg-media.ts).
+  markdown: { processor: satteri({ mdastPlugins: [inlineSvgImages] }) },
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith('/writing/') || publishedPosts >= 1,

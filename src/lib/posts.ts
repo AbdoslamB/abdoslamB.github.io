@@ -19,10 +19,11 @@ export const MIN_POSTS_FOR_SECTION = 2;
 export const showWriting = (posts: Post[]) =>
   posts.length >= MIN_POSTS_FOR_SECTION;
 
-// Counts only words a reader sees: inline illustrations and other HTML are
-// stripped first, so SVG markup doesn't inflate the estimate.
+// Counts only words a reader sees: images, inline illustrations and other
+// HTML are stripped first, so alt text and SVG markup don't inflate it.
 export const readingMinutes = (body = '') => {
   const text = body
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
     .replace(/<svg[\s\S]*?<\/svg>/g, ' ')
     .replace(/<[^>]+>/g, ' ')
     .trim();

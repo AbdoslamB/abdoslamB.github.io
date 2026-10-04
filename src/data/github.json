@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-04T03:04:42.705Z",
+  "fetchedAt": "2026-10-04T06:42:46.971Z",
   "repos": {
     "AbdoslamB": {
       "name": "AbdoslamB",
@@ -21,7 +21,7 @@
       "language": "TypeScript",
       "stars": 0,
       "forks": 0,
-      "pushedAt": "2026-10-04T02:50:34Z",
+      "pushedAt": "2026-10-04T03:07:30Z",
       "fork": false,
       "archived": false
     },
@@ -79,7 +79,7 @@
       "homepage": "https://abdoslamb.github.io/InkDoc",
       "description": "Turn any document into clean, AI-ready Markdown — locally on your machine. Desktop app for Windows, macOS & Linux powered by MarkItDown, Docling, GLM-OCR and Markit.",
       "language": "Python",
-      "stars": 45,
+      "stars": 46,
       "forks": 7,
       "pushedAt": "2026-10-03T18:58:28Z",
       "fork": false,
@@ -111,6 +111,6 @@
     }
   },
   "downloads": {
-    "InkDoc": 357
+    "InkDoc": 360
   }
 }
