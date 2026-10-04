@@ -14,6 +14,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "prelint": "astro sync",
     "lint": "eslint --cache --max-warnings 0 . && stylelint --max-warnings 0 \"src/**/*.scss\"",
     "format": "prettier --cache --write .",
     "test": "vitest run",
