@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://abdoslamb.github.io">
-    <img src=".github/readme/banner.svg" alt="Abdoslam Baabbad, Data Scientist and Business Analyst" width="100%">
+    <img src=".github/readme/banner.svg" alt="Abdoslam Baabbad, Data Scientist" width="100%">
   </a>
 </p>
 
@@ -19,7 +19,7 @@
   <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-f59e0b?style=flat-square&labelColor=0d1117"></a>
 </p>
 
-The personal site of **Abdoslam Baabbad**, data scientist and business analyst: who I am, the open-source work I build, and what I write about.
+The personal site of **Abdoslam Baabbad**, data scientist: who I am, the open-source work I build, and what I write about.
 
 ## Highlights
 

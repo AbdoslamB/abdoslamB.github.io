@@ -29,9 +29,7 @@ test('hero shows the name, title, sections and dots', async ({ page }) => {
   await expect(
     page.getByRole('heading', { level: 1, name: 'Abdoslam Baabbad' }),
   ).toBeVisible();
-  await expect(
-    page.getByText('Data Scientist · Business Analyst'),
-  ).toBeVisible();
+  await expect(page.getByText('Data Scientist', { exact: true })).toBeVisible();
   // Writing joins the buttons once enough posts are published (see
   // src/lib/posts.ts), so expect it exactly when the section is on the page.
   const hasWriting = (await page.locator('#writing').count()) > 0;
@@ -168,9 +166,7 @@ test('draft posts are not published', async ({ page }) => {
 });
 
 test('page metadata and share image are in place', async ({ page }) => {
-  await expect(page).toHaveTitle(
-    'Abdoslam Baabbad — Data Scientist & Business Analyst',
-  );
+  await expect(page).toHaveTitle('Abdoslam Baabbad | Data Scientist');
   const description = await page
     .locator('meta[name="description"]')
     .getAttribute('content');

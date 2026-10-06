@@ -8,16 +8,17 @@ export const site = {
   familyName: 'Baabbad',
   alternateNames: ['عبد السلام باعباد'],
   // Shown under the name on the hero.
-  title: 'Data Scientist · Business Analyst',
+  title: 'Data Scientist',
   // The home page's browser-tab and search-result title.
-  homeTitle: 'Abdoslam Baabbad — Data Scientist & Business Analyst',
+  homeTitle: 'Abdoslam Baabbad | Data Scientist',
   // Used for search results and link previews (aim for 140–160 characters).
   description:
-    'Abdoslam Baabbad is a data scientist and business analyst working on data analytics, forecasting and optimisation, and the builder of InkDoc.',
+    'Abdoslam Baabbad is a data scientist working on forecasting, machine learning and optimisation for high-volume financial data, and the builder of InkDoc.',
   url: 'https://abdoslamb.github.io',
   locale: 'en_US',
   // Topics for the Person structured data that search engines read.
   knowsAbout: [
+    'Data Science',
     'Data analytics',
     'Time series forecasting',
     'Optimisation',
