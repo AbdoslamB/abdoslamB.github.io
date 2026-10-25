@@ -35,7 +35,9 @@ export const person = () => ({
 export const website = () => ({
   '@type': 'WebSite',
   '@id': websiteId,
+  // The site name Google shows above the URL in search results.
   name: site.name,
+  alternateName: site.name,
   url: `${site.url}/`,
   inLanguage: 'en',
   author: { '@id': personId },

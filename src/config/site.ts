@@ -13,7 +13,7 @@ export const site = {
   homeTitle: 'Abdoslam Baabbad | Data Scientist',
   // Used for search results and link previews (aim for 140–160 characters).
   description:
-    'Abdoslam Baabbad is a data scientist working on forecasting, machine learning and optimisation for high-volume financial data, and the builder of InkDoc.',
+    'Abdoslam Baabbad is a data scientist working on forecasting, machine learning and optimisation for high-volume financial data, and the builder of ModelPlayground and InkDoc.',
   url: 'https://abdoslamb.github.io',
   locale: 'en_US',
   // Topics for the Person structured data that search engines read.
@@ -28,7 +28,7 @@ export const site = {
     'Document AI',
   ],
   // Set to a path in /public (e.g. '/headshot.jpg') to show a photo in About.
-  headshot: '' as string,
+  headshot: '/headshot.jpg' as string,
 };
 
 export const links = {

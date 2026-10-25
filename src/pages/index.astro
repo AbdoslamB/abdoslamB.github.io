@@ -4,6 +4,7 @@ import Hero from '@/components/Hero.astro';
 import Icon from '@/components/Icon.astro';
 import PostCard from '@/components/PostCard.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
+import RegressionLab from '@/components/RegressionLab.astro';
 import { featured, flagship, hiddenRepos, moreCount } from '@/config/projects';
 import { links, site } from '@/config/site';
 import github from '@/data/github.json';
@@ -46,15 +47,25 @@ const sections = [
   <main id="main">
     <section id="about" class="section" aria-labelledby="about-heading">
       <div class="container about">
+        <h2
+          id="about-heading"
+          class="section__heading about__heading"
+          data-section-heading
+          tabindex="-1"
+        >
+          About
+        </h2>
+        {site.headshot && (
+          <img
+            class="about__photo"
+            src={site.headshot}
+            alt={site.name}
+            width="320"
+            height="320"
+            loading="lazy"
+          />
+        )}
         <div class="about__text">
-          <h2
-            id="about-heading"
-            class="section__heading"
-            data-section-heading
-            tabindex="-1"
-          >
-            About
-          </h2>
           <!-- Draft copy: edit freely. -->
           <p class="lead">
             I’m a data scientist who cares most about simplicity and
@@ -66,25 +77,10 @@ const sections = [
             high-volume financial data, working in R, Python and SQL, from
             forecasting to machine learning. I also design the prompts that
             guide AI agents through pipeline work. Outside work, I learn by
-            building: my latest project is{' '}
-            <a href="#projects" data-jump="projects">
-              InkDoc
-            </a>
-            , an open-source app that converts documents into clean Markdown for
-            LLM and RAG pipelines. One rule runs through all of it: if it can’t
-            be reconciled, it isn’t done.
+            building. One rule runs through all of it: if it can’t be
+            reconciled, it isn’t done.
           </p>
         </div>
-        {site.headshot && (
-          <img
-            class="about__photo"
-            src={site.headshot}
-            alt={site.name}
-            width="320"
-            height="320"
-            loading="lazy"
-          />
-        )}
       </div>
     </section>
 
@@ -99,7 +95,9 @@ const sections = [
           Projects
         </h2>
         <p class="section__intro">All open source — code on GitHub.</p>
-        <Flagship project={flagshipView} />
+        <Flagship project={flagshipView}>
+          <RegressionLab slot="media" />
+        </Flagship>
         <div class="grid">
           {projects.map((project) => (
             <ProjectCard project={project} />

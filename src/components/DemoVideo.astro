@@ -1,0 +1,51 @@
+---
+// The flagship's demo recording: one per theme, stacked; CSS shows the one
+// for the current theme. Files are attached by scripts/demo.ts only when
+// needed, and that script ships only on pages that show a recording.
+import type { FeaturedProject } from '@/config/projects';
+
+interface Props {
+  video: NonNullable<FeaturedProject['video']>;
+}
+
+const { video } = Astro.props;
+const themes = ['light', 'dark'] as const;
+---
+
+<figure class="flagship__media demo" data-demo>
+  {themes.map((theme) => (
+    <video
+      class={`demo__video demo__video--${theme}`}
+      data-theme-video={theme}
+      data-src={video[theme].src}
+      data-poster={video[theme].poster}
+      width={video.width}
+      height={video.height}
+      aria-label={video.alt}
+      muted
+      loop
+      playsinline
+      disablepictureinpicture
+      preload="none"
+    />
+  ))}
+  <noscript>
+    <video
+      class="demo__video"
+      src={video.dark.src}
+      poster={video.dark.poster}
+      width={video.width}
+      height={video.height}
+      aria-label={video.alt}
+      controls
+      muted
+      loop
+      playsinline
+      preload="none"
+    />
+  </noscript>
+</figure>
+
+<script>
+  import '@/scripts/demo';
+</script>

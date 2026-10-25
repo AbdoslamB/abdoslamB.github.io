@@ -93,6 +93,34 @@ test('post cards show up to three small tags; the article page shows none', asyn
   ).toHaveCount(0);
 });
 
+test('a whole post card opens its post; the title is not underlined', async ({
+  page,
+}) => {
+  await page.goto('/writing/');
+  const link = page.getByRole('link', { name: /Self-Driving Cars/ });
+  const card = page.locator('.post-card', { has: link });
+  expect(
+    await link.evaluate((el) => getComputedStyle(el).textDecorationLine),
+  ).toBe('none');
+
+  // A click anywhere on the card, not just the title, opens the post.
+  const href = await link.getAttribute('href');
+  // Click where the summary text is drawn: the stretched link sits on top.
+  const box = await card.locator('.card__summary').boundingBox();
+  if (!box) throw new Error('summary not on screen');
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+  await expect(page).toHaveURL(new RegExp(`${href ?? ''}$`));
+
+  // Keyboard focus outlines the card.
+  await page.goto('/writing/');
+  await link.focus();
+  await page.keyboard.press('Shift+Tab');
+  await page.keyboard.press('Tab');
+  expect(await card.evaluate((el) => getComputedStyle(el).outlineStyle)).toBe(
+    'solid',
+  );
+});
+
 test('in-article illustrations sit on the left with text beside them', async ({
   page,
 }) => {

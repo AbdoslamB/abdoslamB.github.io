@@ -38,40 +38,43 @@ export interface DemoVideo {
   poster: string;
 }
 
+// The flagship's media is the regression lab in index.astro, passed through
+// Flagship's `media` slot.
 export const flagship: FeaturedProject = {
-  repo: 'InkDoc',
-  title: 'InkDoc',
+  repo: 'ModelPlayground',
+  title: 'ModelPlayground',
   summary:
-    'A desktop app and local API that turns any document into clean, AI-ready Markdown, with most conversions running on your own machine.',
+    'An interactive lab for learning machine learning: drag, slide and click, and watch the graph, the equation and the error update together.',
   highlights: [
-    'Drop a file, folder or URL and Markdown is saved automatically',
-    'Four conversion engines, including OCR for scanned pages',
-    'Ready-to-run builds for Windows, macOS and Linux',
+    '11 models, from linear regression to deep Q-networks',
+    'Results tested against scikit-learn and Python reference code',
+    'Runs entirely in the browser',
   ],
-  tags: ['Python', 'Document AI', 'RAG'],
+  tags: ['TypeScript', 'Machine learning', 'Data viz'],
   links: [
-    { label: 'Website', href: 'https://abdoslamb.github.io/InkDoc/' },
     {
-      label: 'Download',
-      href: 'https://github.com/AbdoslamB/InkDoc/releases/latest',
+      label: 'Open the playground',
+      href: 'https://abdoslamb.github.io/ModelPlayground/',
     },
   ],
-  video: {
-    alt: 'InkDoc converting a document to Markdown in the desktop app',
-    width: 1200,
-    height: 750,
-    light: {
-      src: '/projects/inkdoc-demo-light.mp4',
-      poster: '/projects/inkdoc-demo-light.webp',
-    },
-    dark: {
-      src: '/projects/inkdoc-demo-dark.mp4',
-      poster: '/projects/inkdoc-demo-dark.webp',
-    },
-  },
 };
 
 export const featured: FeaturedProject[] = [
+  {
+    repo: 'InkDoc',
+    title: 'InkDoc',
+    summary:
+      'A desktop app and local API that turns any document into clean, AI-ready Markdown, with most conversions running on your own machine.',
+    // No tags: its Website and Download buttons take that row.
+    tags: [],
+    links: [
+      {
+        label: 'Download',
+        href: 'https://abdoslamb.github.io/InkDoc/#download',
+      },
+      { label: 'Website', href: 'https://abdoslamb.github.io/InkDoc/' },
+    ],
+  },
   {
     repo: 'IBM_stock_price_forecast',
     title: 'IBM stock price forecast',
@@ -86,13 +89,6 @@ export const featured: FeaturedProject[] = [
     summary:
       'Worked solutions to Hyndman & Athanasopoulos: regression, time-series decomposition, exponential smoothing and ARIMA.',
     tags: ['R', 'Time series', 'Statistics'],
-  },
-  {
-    repo: 'electron-portal-desktop-template',
-    title: 'Electron portal template',
-    summary:
-      'A secure-by-default Electron starter that wraps web apps in a frameless desktop window with a custom title bar.',
-    tags: ['JavaScript', 'Electron', 'Security'],
   },
 ];
 
@@ -109,4 +105,5 @@ export const minStarsShown = 5;
 
 // How many extra repositories to list automatically (newest activity and
 // most stars first). Set to 0 to show only the curated projects.
-export const moreCount = 4;
+// Off: "All repositories on GitHub" below the projects already covers it.
+export const moreCount = 0;

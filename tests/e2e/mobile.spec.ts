@@ -24,6 +24,26 @@ test('mobile: shorter hold, no horizontal scroll, tap to jump', async ({
   expect(Math.abs((await settle(page)) - target)).toBeLessThanOrEqual(2);
 });
 
+test('mobile: swipes over the lab scroll the page; only handles drag', async ({
+  page,
+}) => {
+  await page.goto('/#projects');
+  const lab = page.locator('[data-lab]');
+  await lab.scrollIntoViewIfNeeded();
+  await expect(lab).toHaveAttribute('data-ready');
+  const touchAction = (selector: string) =>
+    lab
+      .locator(selector)
+      .first()
+      .evaluate((el) => getComputedStyle(el).touchAction);
+  expect(await touchAction('.lab__chart')).toBe('pan-y');
+  expect(await touchAction('.lab__handle')).toBe('none');
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - window.innerWidth,
+  );
+  expect(overflow).toBeLessThanOrEqual(0);
+});
+
 test('mobile: article illustrations stack above the text', async ({ page }) => {
   await page.goto('/writing/self-driving-cars-2021/');
   for (const figure of await page

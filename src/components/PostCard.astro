@@ -20,6 +20,7 @@ const { post, headingLevel: Heading = 'h3' } = Astro.props;
     {post.data.draft && <span class="badge">Draft</span>}
   </p>
   <Heading class="card__title">
+    <!-- The link covers the whole card (see .card__link::after). -->
     <a class="card__link" href={`/writing/${post.id}/`}>
       {post.data.title}
     </a>

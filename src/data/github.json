@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-06T02:31:52.753Z",
+  "fetchedAt": "2026-10-25T21:42:02.905Z",
   "repos": {
     "AbdoslamB": {
       "name": "AbdoslamB",
@@ -9,7 +9,7 @@
       "language": null,
       "stars": 0,
       "forks": 0,
-      "pushedAt": "2026-10-05T09:54:23Z",
+      "pushedAt": "2026-10-25T08:01:14Z",
       "fork": false,
       "archived": false
     },
@@ -17,11 +17,11 @@
       "name": "abdoslamB.github.io",
       "url": "https://github.com/AbdoslamB/abdoslamB.github.io",
       "homepage": "http://abdoslamB.github.io",
-      "description": "Personal site of Abdoslam Baabbad, data scientist : projects, writing and ways to get in touch. Built with Astro and published on GitHub Pages.",
+      "description": "Personal website of Abdoslam Baabbad, data scientist : projects, writing and ways to get in touch. Built with Astro and published on GitHub Pages.",
       "language": "TypeScript",
       "stars": 0,
       "forks": 0,
-      "pushedAt": "2026-10-05T10:24:02Z",
+      "pushedAt": "2026-10-25T08:23:27Z",
       "fork": false,
       "archived": false
     },
@@ -79,9 +79,9 @@
       "homepage": "https://abdoslamb.github.io/InkDoc",
       "description": "Turn any document into clean, AI-ready Markdown — locally on your machine. Desktop app for Windows, macOS & Linux powered by MarkItDown, Docling, GLM-OCR and Markit.",
       "language": "Python",
-      "stars": 51,
+      "stars": 57,
       "forks": 7,
-      "pushedAt": "2026-10-03T18:58:28Z",
+      "pushedAt": "2026-10-15T00:49:38Z",
       "fork": false,
       "archived": false
     },
@@ -94,6 +94,18 @@
       "stars": 0,
       "forks": 0,
       "pushedAt": "2022-06-18T16:29:33Z",
+      "fork": false,
+      "archived": false
+    },
+    "ModelPlayground": {
+      "name": "ModelPlayground",
+      "url": "https://github.com/AbdoslamB/ModelPlayground",
+      "homepage": "https://abdoslamb.github.io/ModelPlayground",
+      "description": "Interactive visual labs for machine learning and statistics. Explore algorithms directly ; no black boxes , just live math and graphs.",
+      "language": "Svelte",
+      "stars": 0,
+      "forks": 0,
+      "pushedAt": "2026-10-25T19:16:50Z",
       "fork": false,
       "archived": false
     },
@@ -111,6 +123,6 @@
     }
   },
   "downloads": {
-    "InkDoc": 410
+    "InkDoc": 940
   }
 }

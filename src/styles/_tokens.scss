@@ -16,6 +16,11 @@
   --glass: #000000a6;
   --glow: rgb(128 128 128 / 25%);
   --focus: #52e360;
+
+  // The regression lab's line, best line and misses (hero dot colours).
+  --lab-line: #00bfff;
+  --lab-best: #2d2;
+  --lab-miss: #ff8000;
 }
 
 :root[data-theme='light'] {
@@ -31,6 +36,11 @@
   --glass: #ffffffb3;
   --glow: rgb(128 128 128 / 25%);
   --focus: #12812a;
+
+  // Darker shades of the same hues, for 3:1 contrast on white.
+  --lab-line: #0077b6;
+  --lab-best: #12812a;
+  --lab-miss: #c25700;
 }
 
 :root {

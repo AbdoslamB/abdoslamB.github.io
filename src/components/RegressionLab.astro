@@ -1,0 +1,207 @@
+---
+// A small linear-regression lab for the flagship, adapted from
+// ModelPlayground's. The chart is drawn here, so it shows without JavaScript
+// (the line sits on the best fit). The code that makes it draggable is
+// fetched only when the lab nears the screen (src/scripts/lab.ts).
+import { mse, predict, sums } from '@/lib/regression';
+import {
+  bestLine,
+  equation,
+  handlePositions,
+  HEIGHT,
+  lab,
+  PLOT,
+  scaleX,
+  scaleY,
+  WIDTH,
+  X0,
+  X1,
+  xTicks,
+  yTicks,
+  yTop,
+} from '@/lib/regression-chart';
+
+const points = lab.batches[0] ?? [];
+const top = yTop(points);
+const line = bestLine(points);
+if (!line) throw new Error('The regression lab needs points at different x');
+const error = mse(
+  sums(
+    points.map(([x]) => x),
+    points.map(([, y]) => y),
+  ),
+  line,
+);
+const ends = {
+  x1: scaleX(X0),
+  y1: scaleY(predict(line, X0), top),
+  x2: scaleX(X1),
+  y2: scaleY(predict(line, X1), top),
+};
+const handles = handlePositions(line, top);
+const round = (value: number) => Math.round(value * 100) / 100;
+---
+
+<figure class="flagship__media lab" data-lab data-misses>
+  <svg
+    class="lab__chart"
+    viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+    role="group"
+    aria-label={`Scatter plot of ${lab.y.label.toLowerCase()} against ${lab.x.label.toLowerCase()} for ${points.length} plants, with a line you can move`}
+  >
+    <defs>
+      <clipPath id="lab-clip">
+        <rect
+          x={PLOT.left}
+          y={PLOT.top}
+          width={PLOT.right - PLOT.left}
+          height={PLOT.bottom - PLOT.top}
+        />
+      </clipPath>
+    </defs>
+
+    <g class="lab__grid" aria-hidden="true">
+      <g data-lab-yticks>
+        {yTicks(top).map((tick) => (
+          <>
+            <line
+              x1={PLOT.left}
+              x2={PLOT.right}
+              y1={round(scaleY(tick, top))}
+              y2={round(scaleY(tick, top))}
+            />
+            <text
+              x={PLOT.left - 8}
+              y={round(scaleY(tick, top) + 4)}
+              text-anchor="end"
+            >
+              {tick}
+            </text>
+          </>
+        ))}
+      </g>
+      {xTicks.map((tick) => (
+        <text x={round(scaleX(tick))} y={PLOT.bottom + 18} text-anchor="middle">
+          {tick}
+        </text>
+      ))}
+      <text
+        class="lab__axis-title"
+        x={(PLOT.left + PLOT.right) / 2}
+        y={HEIGHT - 4}
+        text-anchor="middle"
+      >
+        {lab.x.label} ({lab.x.unit})
+      </text>
+      <text
+        class="lab__axis-title"
+        transform={`translate(12 ${(PLOT.top + PLOT.bottom) / 2}) rotate(-90)`}
+        text-anchor="middle"
+      >
+        {lab.y.label} ({lab.y.unit})
+      </text>
+    </g>
+
+    <g
+      class="lab__misses"
+      data-lab-misses
+      clip-path="url(#lab-clip)"
+      aria-hidden="true"
+    >
+      {points.map(([x, y]) => (
+        <line
+          x1={round(scaleX(x))}
+          x2={round(scaleX(x))}
+          y1={round(scaleY(y, top))}
+          y2={round(scaleY(predict(line, x), top))}
+        />
+      ))}
+    </g>
+
+    <g clip-path="url(#lab-clip)">
+      <line class="lab__best" data-lab-best {...ends} aria-hidden="true" />
+      <line class="lab__line" data-lab-line {...ends} />
+      <line class="lab__line-hit" data-lab-line-hit {...ends} />
+    </g>
+
+    <g class="lab__points" aria-hidden="true">
+      {points.map(([x, y]) => (
+        <circle
+          data-lab-point
+          cx={round(scaleX(x))}
+          cy={round(scaleY(y, top))}
+          r="5"
+        />
+      ))}
+    </g>
+
+    {handles.map((handle, index) => (
+      <g
+        class="lab__handle"
+        data-lab-handle
+        role="slider"
+        tabindex="0"
+        aria-label={
+          index === 0 ? 'Left handle of your line' : 'Right handle of your line'
+        }
+        aria-orientation="vertical"
+        aria-valuemin="0"
+        aria-valuemax={top}
+        aria-valuenow={Math.round(handle.y * 10) / 10}
+      >
+        <circle
+          class="lab__handle-hit"
+          cx={round(scaleX(handle.x))}
+          cy={round(scaleY(handle.y, top))}
+          r="26"
+        />
+        <circle
+          class="lab__handle-dot"
+          cx={round(scaleX(handle.x))}
+          cy={round(scaleY(handle.y, top))}
+          r="8"
+        />
+      </g>
+    ))}
+  </svg>
+
+  <figcaption class="lab__panel">
+    <p class="lab__readout">
+      <span class="lab__equation" data-lab-equation>
+        {equation(line)}
+      </span>
+      <span class="lab__mse">
+        MSE <span data-lab-mse>{error.toFixed(1)}</span> {lab.y.unit}²
+      </span>
+    </p>
+    <div class="lab__controls">
+      <button
+        class="lab__button"
+        type="button"
+        data-lab-action="misses"
+        aria-pressed="true"
+      >
+        Misses
+      </button>
+      <button
+        class="lab__button"
+        type="button"
+        data-lab-action="best"
+        aria-pressed="false"
+      >
+        Best line
+      </button>
+      <button class="lab__button" type="button" data-lab-action="next">
+        New data
+      </button>
+      <button class="lab__button" type="button" data-lab-action="reset">
+        Reset
+      </button>
+    </div>
+    <p class="visually-hidden" aria-live="polite" data-lab-status></p>
+  </figcaption>
+</figure>
+
+<script>
+  import '@/scripts/lab';
+</script>

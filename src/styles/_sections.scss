@@ -49,14 +49,20 @@
 
 // ---------------------------------------------------------------- about
 
+// The heading spans the full width so the photo and text start on the same
+// row: the photo's top lines up with the first paragraph, not the heading.
 .about {
   display: grid;
-  gap: 3rem;
+  column-gap: 3rem;
   align-items: start;
 
   @media (width >= 860px) {
     grid-template-columns: minmax(0, 1fr) 18rem;
   }
+}
+
+.about__heading {
+  grid-column: 1 / -1;
 }
 
 .about__text {
@@ -74,11 +80,21 @@
   }
 }
 
+// Narrow screens: sits between heading and text, capped so it doesn't fill a
+// tablet. Wide screens: moves to the right-hand column.
 .about__photo {
   width: 100%;
+  max-width: 18rem;
+  margin-bottom: 2rem;
   border-radius: var(--radius);
   aspect-ratio: 1;
   object-fit: cover;
+
+  @media (width >= 860px) {
+    grid-row: 2;
+    grid-column: 2;
+    margin-bottom: 0;
+  }
 }
 
 // ------------------------------------------------------------- projects
@@ -148,13 +164,13 @@
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: #0d1117;
 }
 
 // Theme-matched recordings stacked in one cell; only the current theme's
 // shows. Without JavaScript, only the <noscript> recording is shown.
 .demo {
   display: grid;
+  background: #0d1117;
 }
 
 .demo__video {
@@ -169,6 +185,189 @@
 [data-theme='light'] .demo__video--dark,
 :root:not(.js) .demo__video[data-src] {
   display: none;
+}
+
+// The regression lab (RegressionLab.astro). The chart is drawn in the HTML;
+// once regression-lab.ts mounts, the root gets [data-ready], and the toggles
+// set [data-misses] and [data-best]. Without JavaScript it is a still chart
+// with the best line, so the parts that only work by hand are hidden.
+.lab {
+  background: var(--bg);
+}
+
+.lab__chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 480 / 250;
+
+  // Swipes over the chart scroll the page; only the handles capture touch.
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.lab__grid {
+  line {
+    stroke: var(--border);
+  }
+
+  text {
+    fill: var(--text-muted);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+
+    // The chart scales down on phones; keep its labels readable.
+    @media (width < 600px) {
+      font-size: 17px;
+    }
+  }
+}
+
+.lab__axis-title {
+  fill: var(--text-soft);
+}
+
+.lab__points circle {
+  fill: var(--text);
+  fill-opacity: 0.8;
+}
+
+.lab__line {
+  stroke: var(--lab-line);
+  stroke-linecap: round;
+  stroke-width: 3;
+}
+
+.lab__line-hit {
+  stroke: transparent;
+  stroke-width: 26;
+}
+
+.lab__best {
+  stroke: var(--lab-best);
+  stroke-dasharray: 6 4;
+  stroke-width: 2;
+}
+
+.lab__misses line {
+  stroke: var(--lab-miss);
+  stroke-dasharray: 2 3;
+  stroke-width: 1.5;
+}
+
+.lab:not([data-best]) .lab__best,
+.lab:not([data-misses]) .lab__misses {
+  display: none;
+}
+
+.lab__handle {
+  outline: none;
+  touch-action: none;
+
+  &:focus-visible .lab__handle-dot {
+    stroke: var(--focus);
+    stroke-width: 4;
+  }
+}
+
+.lab__handle-hit {
+  fill: transparent;
+}
+
+.lab__handle-dot {
+  fill: var(--bg);
+  stroke: var(--lab-line);
+  stroke-width: 3;
+}
+
+.lab[data-ready] {
+  .lab__line-hit {
+    cursor: ns-resize;
+  }
+
+  .lab__handle {
+    cursor: grab;
+  }
+}
+
+.lab[data-dragging],
+.lab[data-dragging] .lab__handle {
+  cursor: grabbing;
+}
+
+.lab__panel {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.75rem clamp(0.75rem, 3vw, 1rem) 0.85rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+// The equation and the MSE share a line, and wrap when there isn't room.
+.lab__readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.lab__equation {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.lab__mse {
+  color: var(--text-muted);
+}
+
+.lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  @media (width < 480px) {
+    gap: 0.3rem;
+  }
+}
+
+.lab__button {
+  min-height: 2.25rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: var(--surface-hover);
+  }
+
+  &[aria-pressed='true'] {
+    border-color: var(--text-muted);
+    background: var(--surface-hover);
+  }
+
+  // Phones: all four still fit on one row.
+  @media (width < 480px) {
+    min-height: 2rem;
+    padding: 0.3rem 0.55rem;
+    font-size: 0.78rem;
+  }
+}
+
+:root:not(.js) {
+  .lab__handle,
+  .lab__controls {
+    display: none;
+  }
 }
 
 .grid {
@@ -187,16 +386,15 @@
   background: var(--surface);
   transition:
     background-color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    box-shadow 0.2s ease;
 
   &:hover {
     background: var(--surface-hover);
     box-shadow: 0 0 1rem 0.25rem var(--glow);
-    transform: translateY(-2px);
   }
 
-  &:focus-within {
+  // With the keyboard, the card's outline shows where focus is.
+  &:has(.card__link:focus-visible) {
     outline: 3px solid var(--focus);
     outline-offset: 3px;
   }
@@ -255,15 +453,6 @@
     color: var(--text-soft);
     font-size: 0.8rem;
   }
-
-  // In cards, tags (and any stats) sit at the bottom so rows line up.
-  .card > & {
-    margin-top: auto;
-  }
-
-  .card > &:last-child {
-    margin-bottom: 0;
-  }
 }
 
 .stats {
@@ -280,6 +469,54 @@
     display: inline-flex;
     gap: 0.3rem;
     align-items: center;
+  }
+}
+
+// Tags, stats and any buttons sit at the bottom, so cards in a row line up.
+.card__foot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: auto;
+
+  .tags {
+    margin: 0;
+  }
+}
+
+.card__actions {
+  // Above the stretched card link, so each opens its own page.
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.card__button {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: var(--surface-hover);
+    color: var(--text);
+  }
+
+  .icon {
+    width: 0.9em;
+    height: 0.9em;
   }
 }
 

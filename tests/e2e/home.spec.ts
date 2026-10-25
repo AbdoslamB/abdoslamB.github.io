@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, type Locator, type Page, test } from '@playwright/test';
 
 import {
   holdLength,
@@ -119,26 +119,107 @@ test('theme choice survives a reload', async ({ page }) => {
   await expect(root).toHaveAttribute('data-theme', 'light');
 });
 
-test('the demo loads only near the screen and follows the theme', async ({
+const labChunkLoaded = (page: Page) =>
+  page.evaluate(() =>
+    performance
+      .getEntriesByType('resource')
+      .some((entry) => entry.name.includes('regression-lab')),
+  );
+
+test('the lab fetches its code only near the screen', async ({ page }) => {
+  const lab = page.locator('[data-lab]');
+  // On the hero, the chart is drawn but its code hasn't been fetched.
+  await expect(lab.locator('.lab__chart')).toBeAttached();
+  expect(await labChunkLoaded(page)).toBe(false);
+  await expect(lab).not.toHaveAttribute('data-ready');
+
+  await lab.scrollIntoViewIfNeeded();
+  await expect(lab).toHaveAttribute('data-ready');
+  expect(await labChunkLoaded(page)).toBe(true);
+  // Like the full lab, the line starts flat for the visitor to tilt.
+  await expect(lab.locator('[data-lab-equation]')).toContainText('+ 0.0 ×');
+  // Only the equation and the MSE are shown; no hint or link to the full lab.
+  await expect(lab.locator('[data-lab-mse]')).toHaveText(/^\d+\.\d$/);
+  await expect(lab.getByRole('link')).toHaveCount(0);
+  await expect(lab).not.toContainText('Typical miss');
+});
+
+test('the lab line moves by keyboard and by mouse', async ({ page }) => {
+  const lab = page.locator('[data-lab]');
+  await lab.scrollIntoViewIfNeeded();
+  await expect(lab).toHaveAttribute('data-ready');
+  const equation = lab.locator('[data-lab-equation]');
+  const mse = lab.locator('[data-lab-mse]');
+
+  const right = lab.getByRole('slider', { name: 'Right handle of your line' });
+  const before = await mse.textContent();
+  await right.focus();
+  for (let i = 0; i < 4; i++) await page.keyboard.press('Shift+ArrowUp');
+  await expect(equation).not.toContainText('+ 0.0 ×');
+  await expect(mse).not.toHaveText(before ?? '');
+  await expect(right).toHaveAttribute('aria-valuetext', /Line height at/);
+
+  // Drag the left handle down with the mouse.
+  await lab.getByRole('button', { name: 'Reset' }).click();
+  await expect(equation).toContainText('+ 0.0 ×');
+  const left = lab.getByRole('slider', { name: 'Left handle of your line' });
+  const box = await left.locator('.lab__handle-dot').boundingBox();
+  if (!box) throw new Error('handle not on screen');
+  const x = box.x + box.width / 2;
+  const y = box.y + box.height / 2;
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x, y + 40, { steps: 5 });
+  await page.mouse.up();
+  await expect(equation).not.toContainText('+ 0.0 ×');
+});
+
+test('the lab toggles misses and the best line, and swaps data', async ({
   page,
 }) => {
-  const demo = page.locator('[data-demo]');
-  const dark = demo.locator('video[data-theme-video="dark"]');
-  const light = demo.locator('video[data-theme-video="light"]');
-  // Nothing downloads while the visitor is on the hero.
-  await expect(dark).not.toHaveAttribute('src', /./);
+  const lab = page.locator('[data-lab]');
+  await lab.scrollIntoViewIfNeeded();
+  await expect(lab).toHaveAttribute('data-ready');
+  // Misses show from the start; the visitor can turn them off.
+  const misses = lab.getByRole('button', { name: 'Misses' });
+  await expect(misses).toHaveAttribute('aria-pressed', 'true');
+  await expect(lab.locator('.lab__misses')).toBeVisible();
+  await expect(lab.locator('.lab__best')).toBeHidden();
 
-  await page.goto('/#projects');
-  await expect(dark).toHaveAttribute('src', /inkdoc-demo-dark\.mp4$/);
-  await expect(dark).toBeVisible();
-  await expect(light).toBeHidden();
-  // The other theme's recording waits until it's needed.
-  await expect(light).not.toHaveAttribute('src', /./);
+  await misses.click();
+  await expect(misses).toHaveAttribute('aria-pressed', 'false');
+  await expect(lab.locator('.lab__misses')).toBeHidden();
 
-  await page.getByRole('button', { name: 'Dark mode' }).click();
-  await expect(light).toHaveAttribute('src', /inkdoc-demo-light\.mp4$/);
-  await expect(light).toBeVisible();
-  await expect(dark).toBeHidden();
+  const best = lab.getByRole('button', { name: 'Best line' });
+  await best.click();
+  await expect(best).toHaveAttribute('aria-pressed', 'true');
+  await expect(lab.locator('.lab__best')).toBeVisible();
+
+  // New data moves the points and starts the line flat again.
+  const point = lab.locator('[data-lab-point]').first();
+  const cy = await point.getAttribute('cy');
+  await lab.getByRole('button', { name: 'New data' }).click();
+  await expect(point).not.toHaveAttribute('cy', cy ?? '');
+  await expect(lab.locator('[data-lab-equation]')).toContainText('+ 0.0 ×');
+});
+
+test('without JavaScript the lab is a still chart of the best fit', async ({
+  browser,
+}) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto('/');
+  const lab = page.locator('[data-lab]');
+  await expect(lab.locator('.lab__line')).toBeVisible();
+  await expect(lab.locator('[data-lab-equation]')).toHaveText(
+    'ŷ = 11.8 + 6.2 × age',
+  );
+  await expect(lab.locator('.lab__controls')).toBeHidden();
+  await expect(lab.locator('.lab__handle')).toHaveCount(2);
+  for (const handle of await lab.locator('.lab__handle').all()) {
+    await expect(handle).toBeHidden();
+  }
+  await context.close();
 });
 
 test('header navigation appears only after the hero', async ({ page }) => {
@@ -214,8 +295,11 @@ test('favicons are linked and served', async ({ page }) => {
 
 test('the projects show live GitHub stats', async ({ page }) => {
   const flagship = page.locator('.flagship');
-  await expect(flagship.getByRole('heading', { name: 'InkDoc' })).toBeVisible();
-  await expect(flagship.locator('.stats')).toContainText('downloads');
+  await expect(
+    flagship.getByRole('heading', { name: 'ModelPlayground' }),
+  ).toBeVisible();
+  const inkdoc = page.locator('#projects .card', { hasText: 'InkDoc' });
+  await expect(inkdoc.locator('.stats')).toContainText('downloads');
   expect(await page.locator('#projects .card').count()).toBeGreaterThanOrEqual(
     3,
   );
@@ -271,14 +355,54 @@ test('projects show only what helps: three tags, meaningful stars', async ({
   await expect(projects.getByText('All open source')).toBeVisible();
   await expect(projects.getByText(/Flagship project/i)).toHaveCount(0);
   await expect(projects.getByText(/Updated/)).toHaveCount(0);
-  await expect(projects.locator('.flagship video:visible')).toHaveCount(1); // demo only
+  // The flagship shows its lab; nothing on the page is a video.
+  await expect(projects.locator('.flagship .lab__chart')).toBeVisible();
+  await expect(page.locator('video')).toHaveCount(0);
 
   for (const list of await projects.locator('.tags').all()) {
     expect(await list.locator('li').count()).toBeLessThanOrEqual(3);
   }
-  // InkDoc's stars and downloads stay; low star counts elsewhere are hidden.
-  await expect(projects.locator('.flagship .stats')).toContainText('downloads');
-  await expect(projects.locator('.card .stats')).toHaveCount(0);
+  // InkDoc's downloads stay; low star counts elsewhere are hidden.
+  await expect(projects.locator('.card .stats')).toHaveCount(1);
+  await expect(
+    projects.locator('.card', { hasText: 'InkDoc' }).locator('.stats'),
+  ).toContainText('downloads');
+});
+
+// The link a click at the middle of `locator` would follow.
+const linkAt = (locator: Locator) =>
+  locator.evaluate((el) => {
+    const rect = el.getBoundingClientRect();
+    const hit = document.elementFromPoint(
+      rect.left + rect.width / 2,
+      rect.top + rect.height / 2,
+    );
+    return hit?.closest('a')?.getAttribute('href') ?? null;
+  });
+
+test('a whole project card opens it on GitHub; only InkDoc has buttons', async ({
+  page,
+}) => {
+  const cards = page.locator('#projects .card');
+  for (const card of await cards.all()) {
+    await card.scrollIntoViewIfNeeded();
+    const github = await card.locator('.card__link').getAttribute('href');
+    expect(github).toMatch(/^https:\/\/github\.com\/AbdoslamB\//);
+    expect(await linkAt(card.locator('.card__summary'))).toBe(github);
+  }
+  await expect(page.locator('#projects .card__actions')).toHaveCount(1);
+  await expect(
+    page.getByRole('link', { name: /source on GitHub/ }),
+  ).toHaveCount(0);
+
+  // InkDoc: Download and Website, no tags; its buttons open their own pages.
+  const inkdoc = cards.filter({ hasText: 'InkDoc' });
+  await expect(inkdoc.locator('.tags')).toHaveCount(0);
+  const buttons = inkdoc.locator('.card__actions a');
+  await expect(buttons).toHaveText(['Download', 'Website']);
+  for (const button of await buttons.all()) {
+    expect(await linkAt(button)).toBe(await button.getAttribute('href'));
+  }
 });
 
 test('footer credits the author without a copyright line', async ({ page }) => {

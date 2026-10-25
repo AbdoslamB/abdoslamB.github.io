@@ -1,4 +1,5 @@
 ---
+import Icon from '@/components/Icon.astro';
 import ProjectStats from '@/components/ProjectStats.astro';
 import { type ProjectView, visibleTags } from '@/lib/projects';
 
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const { project } = Astro.props;
+const tags = visibleTags(project.tags);
 ---
 
 <article class="card">
@@ -18,10 +20,25 @@ const { project } = Astro.props;
   </h3>
   <p class="card__summary">{project.summary}</p>
   {project.result && <p class="card__result">{project.result}</p>}
-  <ul class="tags" aria-label="Topics">
-    {visibleTags(project.tags).map((tag) => (
-      <li>{tag}</li>
-    ))}
-  </ul>
-  <ProjectStats project={project} />
+  <div class="card__foot">
+    {tags.length > 0 && (
+      <ul class="tags" aria-label="Topics">
+        {tags.map((tag) => (
+          <li>{tag}</li>
+        ))}
+      </ul>
+    )}
+    <ProjectStats project={project} />
+    {project.links && (
+      // Sit above the card link, so they open their own pages.
+      <div class="card__actions">
+        {project.links.map(({ label, href }) => (
+          <a class="card__button" href={href} rel="noopener">
+            {label}
+            <Icon name="external" />
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
 </article>
