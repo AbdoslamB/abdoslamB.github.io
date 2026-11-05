@@ -73,24 +73,79 @@
   --container: 72rem;
   --gutter: clamp(1rem, 4vw, 2rem);
 
-  // Spring curves for the jelly button. The cubic-bezier pair is the fallback;
-  // a custom property holding an unsupported linear() would wipe out the whole
-  // transition, so the multi-bounce springs are only set where it's supported.
-  --ease-jelly-in: cubic-bezier(0.34, 1.56, 0.64, 1);
+  // Spring curves for the jelly button, sampled from a real damped spring
+  // (y = 1 - e^(-z*wn*t)(cos wd*t + z/sqrt(1-z^2) sin wd*t)) so the motion
+  // rounds over its crests instead of turning sharp corners.
+  //   in:  damping 0.42, 23% overshoot peaking at 236ms; use over 0.76s
+  //   out: damping 0.63, 8% overshoot peaking at 250ms; use over 0.58s
+  // The cubic-bezier pair is the fallback: a custom property holding an
+  // unsupported linear() would wipe out the whole transition, so the springs
+  // are only set where linear() is supported.
+  --ease-jelly-in: cubic-bezier(0.28, 1.45, 0.55, 1);
   --ease-jelly-out: cubic-bezier(0.22, 1, 0.36, 1);
 
   @supports (transition-timing-function: linear(0, 1)) {
     --ease-jelly-in: linear(
       0,
-      0.52 11%,
-      0.96 22%,
-      1.16 33%,
-      1.05 44%,
-      0.96 56%,
-      0.99 70%,
-      1.01 84%,
+      0.055 3.1%,
+      0.194 6.3%,
+      0.382 9.4%,
+      0.586 12.5%,
+      0.782 15.6%,
+      0.951 18.8%,
+      1.082 21.9%,
+      1.171 25%,
+      1.22 28.1%,
+      1.234 31.3%,
+      1.219 34.4%,
+      1.186 37.5%,
+      1.141 40.6%,
+      1.094 43.8%,
+      1.048 46.9%,
+      1.009 50%,
+      0.979 53.1%,
+      0.959 56.3%,
+      0.948 59.4%,
+      0.945 62.5%,
+      0.949 65.6%,
+      0.957 68.8%,
+      0.968 71.9%,
+      0.979 75%,
+      0.989 78.1%,
+      0.998 81.3%,
+      1.005 84.4%,
+      1.01 87.5%,
+      1.012 90.6%,
+      1.013 93.8%,
+      1.012 96.9%,
       1
     );
-    --ease-jelly-out: linear(0, 0.65 18%, 1.06 42%, 0.99 68%, 1);
+    --ease-jelly-out: linear(
+      0,
+      0.065 4.2%,
+      0.215 8.3%,
+      0.401 12.5%,
+      0.586 16.7%,
+      0.748 20.8%,
+      0.878 25%,
+      0.971 29.2%,
+      1.032 33.3%,
+      1.065 37.5%,
+      1.077 41.7%,
+      1.076 45.8%,
+      1.066 50%,
+      1.052 54.2%,
+      1.037 58.3%,
+      1.024 62.5%,
+      1.013 66.7%,
+      1.004 70.8%,
+      0.999 75%,
+      0.996 79.2%,
+      0.994 83.3%,
+      0.994 87.5%,
+      0.995 91.7%,
+      0.996 95.8%,
+      1
+    );
   }
 }
