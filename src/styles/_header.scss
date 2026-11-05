@@ -14,8 +14,16 @@
   pointer-events: none;
   transition: top 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 
+  // `top`, not transform: a transformed header can stop the blur layers
+  // inside it from seeing the page behind.
   &[data-state='hidden'] {
     top: calc(-1 * var(--header-height) - 4.5rem);
+  }
+
+  // Slide back in while a link or the theme toggle inside has keyboard
+  // focus, so a focused control is never off-screen (WCAG 2.4.11).
+  &[data-state='hidden']:focus-within {
+    top: 0;
   }
 
   @media (width <= 480px) {
