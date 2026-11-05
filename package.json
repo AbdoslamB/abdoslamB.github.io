@@ -4,7 +4,7 @@
   "type": "module",
   "homepage": "https://abdoslamb.github.io/",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "dev": "astro dev",
@@ -22,10 +22,10 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "^0.4.2",
+    "@astrojs/markdown-satteri": "^0.4.6",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.3.5"
+    "astro": "^7.4.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
