@@ -27,6 +27,14 @@ const initials = site.name
 ---
 
 <header class="site-header" data-state={isHome ? 'hero' : 'solid'}>
+  <div class="site-header__backdrop" aria-hidden="true">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
   <nav class="site-header__nav" aria-label="Main">
     <a
       class="site-header__logo"
@@ -49,3 +57,40 @@ const initials = site.name
   </nav>
   <ThemeToggle />
 </header>
+
+<script>
+  // On non-hero pages (where home.ts is not active), handle scroll show/hide
+  const track = document.querySelector('[data-hero-track]');
+  const header = document.querySelector<HTMLElement>('.site-header');
+
+  if (header && !track) {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    const SCROLL_DELTA = 8;
+
+    const updateHeader = () => {
+      const currentScrollY = Math.max(0, window.scrollY);
+      const diff = currentScrollY - lastScrollY;
+
+      if (diff > SCROLL_DELTA && currentScrollY > 60) {
+        header.dataset.state = 'hidden';
+      } else if (diff < -SCROLL_DELTA || currentScrollY <= 20) {
+        header.dataset.state = 'solid';
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateHeader);
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
+  }
+</script>

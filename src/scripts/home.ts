@@ -83,6 +83,8 @@ if (track && hero && canvas) {
   };
 
   let lastY = window.scrollY;
+  let lastHeaderY = window.scrollY;
+  const SCROLL_DELTA = 8;
   let direction: -1 | 1 = 1;
   let input: ScrollInput = 'pointer';
 
@@ -98,7 +100,21 @@ if (track && hero && canvas) {
     field.setScatter(reducedMotion.matches ? 0 : progress);
     if (header) {
       const pastHero = y >= holdLength + window.innerHeight * 0.5;
-      header.dataset.state = pastHero ? 'solid' : 'hero';
+      if (!pastHero) {
+        header.dataset.state = 'hero';
+      } else if (tweening) {
+        header.dataset.state = 'solid';
+      } else {
+        const diff = y - lastHeaderY;
+        if (header.dataset.state === 'hero') {
+          header.dataset.state = 'solid';
+        } else if (diff > SCROLL_DELTA) {
+          header.dataset.state = 'hidden';
+        } else if (diff < -SCROLL_DELTA) {
+          header.dataset.state = 'solid';
+        }
+      }
+      lastHeaderY = y;
     }
   };
 
@@ -112,6 +128,7 @@ if (track && hero && canvas) {
     if (!tweening) return;
     cancelAnimationFrame(tweenFrame);
     tweening = false;
+    lastHeaderY = window.scrollY;
   };
 
   const scrollToY = (y: number, duration: number, done?: () => void) => {
@@ -134,6 +151,7 @@ if (track && hero && canvas) {
         tweenFrame = requestAnimationFrame(step);
       } else {
         tweening = false;
+        lastHeaderY = window.scrollY;
         ignoreSettleUntil = performance.now() + 200;
         done?.();
       }

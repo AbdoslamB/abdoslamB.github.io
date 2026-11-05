@@ -606,7 +606,12 @@
   padding-block: 2rem;
   border-top: 1px solid var(--border);
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
 
   p {
     margin: 0;
@@ -634,7 +639,13 @@
     gap: 0.35rem;
     align-items: center;
     color: var(--text-muted);
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
     text-decoration: none;
+    transition: color 0.2s ease;
 
     &:hover {
       color: var(--text);

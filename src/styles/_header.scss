@@ -11,20 +11,81 @@
   justify-content: space-between;
   height: var(--header-height);
   padding-inline: var(--gutter) 1rem;
-  border-bottom: 1px solid transparent;
-  transition:
-    background-color 0.3s ease,
-    border-color 0.3s ease;
+  pointer-events: none;
+  transition: top 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &[data-state='hidden'] {
+    top: calc(-1 * var(--header-height) - 4.5rem);
+  }
 
   @media (width <= 480px) {
     gap: 0.25rem;
     padding-inline: 1rem 0.25rem;
   }
+}
 
-  &[data-state='solid'] {
-    border-color: var(--border);
-    background: var(--glass);
-    backdrop-filter: blur(14px) saturate(140%);
+// 6-stage progressive optical blur (exponential decay)
+.site-header__backdrop {
+  // Extends 4rem (64px) below the header for a deep, luxurious decay zone
+  position: absolute;
+  inset: 0 0 -4rem;
+  z-index: -1;
+  pointer-events: none;
+  visibility: hidden;
+
+  [data-state='solid'] > &,
+  [data-state='hidden'] > & {
+    visibility: visible;
+  }
+
+  > div {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+
+    [data-state='solid'] &,
+    [data-state='hidden'] & {
+      opacity: 1;
+    }
+  }
+
+  // Layer 1 (Bottom-most micro-blur: 100% down to 0% height)
+  > div:nth-child(1) {
+    backdrop-filter: blur(0.5px);
+    mask-image: linear-gradient(to top, transparent 0%, black 20%);
+  }
+
+  // Layer 2 (Subtle feather: 88% up to top)
+  > div:nth-child(2) {
+    backdrop-filter: blur(1px);
+    mask-image: linear-gradient(to top, transparent 12%, black 32%);
+  }
+
+  // Layer 3 (Light optical blur: 75% up to top)
+  > div:nth-child(3) {
+    backdrop-filter: blur(2px);
+    mask-image: linear-gradient(to top, transparent 25%, black 48%);
+  }
+
+  // Layer 4 (Medium lens blur: 60% up to top)
+  > div:nth-child(4) {
+    backdrop-filter: blur(4px) saturate(130%);
+    mask-image: linear-gradient(to top, transparent 40%, black 64%);
+  }
+
+  // Layer 5 (Strong glass blur behind nav text: 45% up to top)
+  > div:nth-child(5) {
+    backdrop-filter: blur(8px) saturate(160%);
+    mask-image: linear-gradient(to top, transparent 55%, black 80%);
+  }
+
+  // Layer 6 (Deep top refraction core + subtle glass tint on the TOP layer only)
+  > div:nth-child(6) {
+    backdrop-filter: blur(16px) saturate(190%);
+    background: linear-gradient(to bottom, var(--glass) 0%, transparent 100%);
+    mask-image: linear-gradient(to top, transparent 65%, black 95%);
   }
 }
 
@@ -35,11 +96,13 @@
   min-width: 0;
   opacity: 0;
   visibility: hidden;
+  pointer-events: auto;
   transition:
     opacity 0.3s ease,
     visibility 0.3s;
 
-  [data-state='solid'] > & {
+  [data-state='solid'] > &,
+  [data-state='hidden'] > & {
     opacity: 1;
     visibility: visible;
   }
@@ -121,6 +184,7 @@
   border-radius: 0.75rem;
   background: transparent;
   cursor: pointer;
+  pointer-events: auto;
   transition: background-color 0.2s ease;
 
   &:hover {
