@@ -12,7 +12,7 @@
   height: var(--header-height);
   padding-inline: var(--gutter) 1rem;
   pointer-events: none;
-  transition: top 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: top 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 
   // `top`, not transform: a transformed header can stop the blur layers
   // inside it from seeing the page behind.
