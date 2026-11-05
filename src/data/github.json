@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-25T21:42:02.905Z",
+  "fetchedAt": "2026-11-05T03:43:07.838Z",
   "repos": {
     "AbdoslamB": {
       "name": "AbdoslamB",
@@ -9,7 +9,7 @@
       "language": null,
       "stars": 0,
       "forks": 0,
-      "pushedAt": "2026-10-25T08:01:14Z",
+      "pushedAt": "2026-11-04T10:18:47Z",
       "fork": false,
       "archived": false
     },
@@ -21,7 +21,7 @@
       "language": "TypeScript",
       "stars": 0,
       "forks": 0,
-      "pushedAt": "2026-10-25T08:23:27Z",
+      "pushedAt": "2026-11-04T10:54:01Z",
       "fork": false,
       "archived": false
     },
@@ -79,9 +79,9 @@
       "homepage": "https://abdoslamb.github.io/InkDoc",
       "description": "Turn any document into clean, AI-ready Markdown — locally on your machine. Desktop app for Windows, macOS & Linux powered by MarkItDown, Docling, GLM-OCR and Markit.",
       "language": "Python",
-      "stars": 57,
-      "forks": 7,
-      "pushedAt": "2026-10-15T00:49:38Z",
+      "stars": 60,
+      "forks": 9,
+      "pushedAt": "2026-11-05T02:21:36Z",
       "fork": false,
       "archived": false
     },
@@ -102,10 +102,10 @@
       "url": "https://github.com/AbdoslamB/ModelPlayground",
       "homepage": "https://abdoslamb.github.io/ModelPlayground",
       "description": "Interactive visual labs for machine learning and statistics. Explore algorithms directly ; no black boxes , just live math and graphs.",
-      "language": "Svelte",
+      "language": "TypeScript",
       "stars": 0,
       "forks": 0,
-      "pushedAt": "2026-10-25T19:16:50Z",
+      "pushedAt": "2026-11-01T07:58:55Z",
       "fork": false,
       "archived": false
     },
@@ -123,6 +123,6 @@
     }
   },
   "downloads": {
-    "InkDoc": 940
+    "InkDoc": 1309
   }
 }
