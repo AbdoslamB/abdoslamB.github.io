@@ -43,7 +43,11 @@
   padding: var(--header-height) var(--gutter) 5rem;
   background-color: var(--bg);
   text-align: center;
-  transition: background-color 0.5s linear;
+
+  // Theme switch fallback (see body in _base.scss).
+  @supports not (view-transition-name: none) {
+    transition: background-color 0.5s linear;
+  }
 }
 
 .hero[data-faded] :is(.hero__content, .hero__hint) {

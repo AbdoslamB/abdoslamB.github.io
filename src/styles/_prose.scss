@@ -34,6 +34,7 @@
   color: var(--text-muted);
   font-size: 0.95rem;
   text-decoration: none;
+  transition: color 0.2s ease;
 
   .icon {
     transform: rotate(180deg);
@@ -269,7 +270,11 @@
 
   .ill-bg {
     fill: var(--bg);
-    transition: fill 0.5s linear;
+
+    // Theme switch fallback (see body in _base.scss).
+    @supports not (view-transition-name: none) {
+      transition: fill 0.5s linear;
+    }
   }
 
   // Text inside diagrams. Sizes are in viewBox units, so they scale with it.

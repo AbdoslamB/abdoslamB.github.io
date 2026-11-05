@@ -28,9 +28,21 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition:
-    background-color 0.5s linear,
-    color 0.5s linear;
+
+  // Theme switch fallback; browsers with view transitions cross-fade the
+  // whole page instead (see theme.ts and ::view-transition-group below).
+  @supports not (view-transition-name: none) {
+    transition:
+      background-color 0.5s linear,
+      color 0.5s linear;
+  }
+}
+
+// The theme switch cross-fade. A little longer than the 0.25s default so it
+// reads as a fade rather than a flash.
+::view-transition-group(root) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 img,
