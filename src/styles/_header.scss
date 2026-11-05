@@ -22,7 +22,9 @@
 
   // Slide back in while a link or the theme toggle inside has keyboard
   // focus, so a focused control is never off-screen (WCAG 2.4.11).
-  &[data-state='hidden']:focus-within {
+  // :focus-visible, not :focus-within: a mouse click also leaves focus on
+  // the toggle, which would otherwise pin the header open.
+  &[data-state='hidden']:has(:focus-visible) {
     top: 0;
   }
 

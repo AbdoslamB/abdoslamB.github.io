@@ -405,6 +405,28 @@ test('a whole project card opens it on GitHub; only InkDoc has buttons', async (
   }
 });
 
+test('header still hides on scroll after a click, but not under keyboard focus', async ({
+  page,
+}) => {
+  await page.goto('/#about');
+  const header = page.locator('.site-header');
+  const headerTop = () =>
+    header.evaluate((el) => Math.round(el.getBoundingClientRect().top));
+  await expect(header).toHaveAttribute('data-state', 'solid');
+
+  // A mouse click leaves focus on the toggle; that mustn't pin the header.
+  await page.locator('[data-theme-toggle]').click();
+  await page.mouse.move(640, 400);
+  await scrollSteps(page, 600);
+  await expect(header).toHaveAttribute('data-state', 'hidden');
+  await expect.poll(headerTop).toBeLessThan(0);
+
+  // Tabbing to a control in the hidden header brings it back (WCAG 2.4.11).
+  await page.keyboard.press('Shift+Tab');
+  await expect(header).toHaveAttribute('data-state', 'hidden');
+  await expect.poll(headerTop).toBe(0);
+});
+
 test('footer credits the author without a copyright line', async ({ page }) => {
   const footer = page.locator('.site-footer');
   await expect(footer.locator('p')).toHaveText('By Abdoslam Baabbad');
